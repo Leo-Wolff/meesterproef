@@ -1,5 +1,38 @@
 // THIS CODE IS COMPLETELY CHAT.GPT IT WILL BE EDITED TO BE MORE EFFICIENT AND FLEXIBLE
+// SCROLL
+let shouldSwitchArticles = true
 
+document.addEventListener("click", function () {
+	const articles = document.querySelectorAll("article")
+
+	if (shouldSwitchArticles) {
+		// Add the 'hidden' class to fantasyArticle and remove it from realityArticle
+		articles[0].classList.add("hidden")
+		articles[1].classList.remove("hidden")
+
+		// Scroll to the bottom of the page
+		window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+
+		console.log("Scrolled")
+
+		// Invert the value of shouldSwitchArticles
+		shouldSwitchArticles = !shouldSwitchArticles
+	} else {
+		// Add the 'hidden' class to fantasyArticle and remove it from realityArticle
+		articles[0].classList.remove("hidden")
+		articles[1].classList.add("hidden")
+
+		// Scroll to the top of the page
+		window.scrollTo({ top: 0, behavior: "smooth" })
+
+		console.log("Not scrolled")
+
+		// Invert the value of shouldSwitchArticles
+		shouldSwitchArticles = !shouldSwitchArticles
+	}
+})
+
+//REALITY LEVEL
 // Get the textarea element
 var textarea = document.getElementById("myTextarea")
 
