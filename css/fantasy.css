@@ -1,0 +1,40 @@
+/* *************
+STARS
+************* */
+article:first-of-type > section {
+	position: relative;
+	top: 2em;
+	left: calc(50% - (50vw / 2));
+	bottom: 2em;
+
+	width: 50vw;
+	height: calc(100vh - 4em);
+
+	background-color: green;
+}
+
+article:first-of-type div {
+	position: absolute;
+
+	width: 1em;
+	height: 1em;
+
+	background-color: #e5b874;
+	border-radius: 50%;
+	box-shadow: 0 0 1em 0.5em #da9863;
+	animation: glow 2s infinite ease-in-out;
+}
+
+article:first-of-type > section:first-of-type {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+article:first-of-type > section:first-of-type div {
+	transform: translateY(-20vh);
+}
+
+article:first-of-type > section:first-of-type div {
+	transform: translateY(-20vh);
+}

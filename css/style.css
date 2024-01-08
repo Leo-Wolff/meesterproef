@@ -22,7 +22,7 @@ body {
 	width: 100vw;
 	height: 200vh;
 
-	overflow: hidden;
+	/* overflow: hidden; */
 
 	background: linear-gradient(
 		rgba(2, 0, 36, 1) 0%,
@@ -36,4 +36,16 @@ body {
 /* Classlist related classes */
 .hidden {
 	display: none;
+}
+
+/* *************
+LAY-OUT
+************* */
+article:first-of-type {
+	height: 100vh;
+	background-color: gray;
+}
+
+article:last-of-type {
+	height: 100vh;
 }

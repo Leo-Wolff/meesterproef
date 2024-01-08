@@ -36,8 +36,9 @@ var premadeText = "Your premade text here."
 var currentIndex = 0
 
 // Add an event listener for any key press
-if (!articles[1].classList.contains("hidden")) {
-	document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", function (event) {
+	// Check if the textarea is focused
+	if (document.activeElement === textarea) {
 		// Check if the pressed key is an alphabetical letter
 		if (/^[a-zA-Z]$/.test(event.key)) {
 			// Check if there are more letters to print
@@ -61,8 +62,8 @@ if (!articles[1].classList.contains("hidden")) {
 			// Prevent other keys from triggering default behavior
 			event.preventDefault()
 		}
-	})
-}
+	}
+})
 
 // Clear the textarea content and reset the index when the page is loaded
 window.addEventListener("load", function () {
