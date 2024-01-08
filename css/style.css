@@ -43,7 +43,6 @@ LAY-OUT
 ************* */
 article:first-of-type {
 	height: 100vh;
-	background-color: gray;
 }
 
 article:last-of-type {

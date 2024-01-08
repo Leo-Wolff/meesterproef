@@ -9,8 +9,6 @@ article:first-of-type > section {
 
 	width: 50vw;
 	height: calc(100vh - 4em);
-
-	background-color: green;
 }
 
 article:first-of-type div {
@@ -22,7 +20,6 @@ article:first-of-type div {
 	background-color: #e5b874;
 	border-radius: 50%;
 	box-shadow: 0 0 1em 0.5em #da9863;
-	animation: glow 2s infinite ease-in-out;
 }
 
 article:first-of-type > section:first-of-type {
@@ -31,10 +28,34 @@ article:first-of-type > section:first-of-type {
 	align-items: center;
 }
 
-article:first-of-type > section:first-of-type div {
-	transform: translateY(-20vh);
+article:first-of-type > section:first-of-type div:first-of-type {
+	transform: rotate(calc(1 * 360deg / 8)) translate(15vw);
 }
 
-article:first-of-type > section:first-of-type div {
-	transform: translateY(-20vh);
+article:first-of-type > section:first-of-type div:nth-of-type(2) {
+	transform: rotate(calc(2 * 360deg / 8)) translate(15vw);
+}
+
+article:first-of-type > section:first-of-type div:nth-of-type(3) {
+	transform: rotate(calc(3 * 360deg / 8)) translate(15vw);
+}
+
+article:first-of-type > section:first-of-type div:nth-of-type(4) {
+	transform: rotate(calc(4 * 360deg / 8)) translate(15vw);
+}
+
+article:first-of-type > section:first-of-type div:nth-of-type(5) {
+	transform: rotate(calc(5 * 360deg / 8)) translate(15vw);
+}
+
+article:first-of-type > section:first-of-type div:nth-of-type(6) {
+	transform: rotate(calc(6 * 360deg / 8)) translate(15vw);
+}
+
+article:first-of-type > section:first-of-type div:nth-of-type(7) {
+	transform: rotate(calc(7 * 360deg / 8)) translate(15vw);
+}
+
+article:first-of-type > section:first-of-type div:nth-of-type(8) {
+	transform: rotate(calc(8 * 360deg / 8)) translate(15vw);
 }
