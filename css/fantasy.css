@@ -22,6 +22,10 @@ article:first-of-type div {
 	box-shadow: 0 0 1em 0.5em #da9863;
 }
 
+article:first-of-type div:hover {
+	cursor: pointer;
+}
+
 article:first-of-type > section:first-of-type {
 	display: flex;
 	justify-content: center;

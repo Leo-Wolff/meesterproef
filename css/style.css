@@ -33,9 +33,21 @@ body {
 	scroll-behavior: smooth;
 }
 
+p {
+	margin: 0;
+
+	text-indent: 1em;
+	font-size: calc(1em + 0.5vw);
+	color: white;
+}
+
 /* Classlist related classes */
 .hidden {
-	display: none;
+	display: none !important;
+}
+
+article:first-of-type div.active {
+	background-color: red;
 }
 
 /* *************
@@ -47,4 +59,31 @@ article:first-of-type {
 
 article:last-of-type {
 	height: 100vh;
+}
+
+/* *************
+LIVES
+************* */
+main > section:first-of-type {
+	display: flex;
+	gap: 1em;
+
+	position: absolute;
+	top: 3vh;
+	right: 3vw;
+}
+
+main > section:first-of-type div {
+	width: 3em;
+	height: 3em;
+
+	border: 5px solid transparent;
+	border-radius: 50%;
+
+	background-color: red;
+}
+
+main > section:first-of-type div.loss {
+	border: 5px solid red;
+	background: none;
 }
