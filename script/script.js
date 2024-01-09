@@ -1,10 +1,12 @@
+// /////////////
 // DATABASE
+// /////////////
 import realityData from "./database.js"
 // console.log(realityData)
 
-//
+// /////////////
 // LIVES
-//
+// /////////////
 
 // VARIABLES
 const lives = document.querySelectorAll("main > section:first-of-type img")
@@ -22,20 +24,47 @@ const checkLives = () => {
 	}
 }
 
-//
+// /////////////
 // REALITY - LEVELS
-//
+// /////////////
 
 // VARIABLES
 let currentRealityLevel = 0
-const allTextAreas = document.querySelectorAll("textarea")
-const textArea = allTextAreas[currentRealityLevel]
+const levels = document.querySelectorAll("article:last-of-type > section")
+const textArea = levels[currentRealityLevel].querySelector("textarea")
 const taskText = realityData[currentRealityLevel].taskText
 let currentCharacter = 0
 
-console.log(textArea)
-console.log(taskText)
+// console.log(textArea)
+// console.log(taskText)
+// console.log(currentRealityLevel)
 
+// LEVEL VISIBILITY
+const showLevel = () => {
+	levels.forEach((section, index) => {
+		if (index !== currentRealityLevel) {
+			section.classList.add("hidden")
+		} else {
+			section.classList.remove("hidden")
+		}
+	})
+}
+
+showLevel()
+
+const generateRandomLevel = () => {
+	let randomLevel = Math.floor(Math.random() * levels.length)
+
+	if (randomLevel == currentRealityLevel) {
+		return generateRandomLevel() // Try again
+	} else {
+		currentRealityLevel = randomLevel
+	}
+
+	console.log(currentRealityLevel)
+}
+
+// TASK BEHAVIOUR
 textArea.addEventListener("keydown", (event) => {
 	if (/^[a-zA-Z]$/.test(event.key)) {
 		// If currentCharacter is smaller than taskText.length than there will be more text to type
@@ -45,6 +74,15 @@ textArea.addEventListener("keydown", (event) => {
 
 			// Increase currentCharacter so that the next iteration of the function can type the next character
 			currentCharacter++
+		} else if (currentCharacter == taskText.length) {
+			scrollArticles = false
+
+			generateRandomLevel()
+			showLevel()
+
+			// Reset text area and go back to fantasy
+			resetText()
+			scrollTransition()
 		}
 	} else {
 		// Prevent other keys from triggering default behavior
@@ -61,18 +99,17 @@ const resetText = () => {
 // Reset the level when the page is loaded
 window.addEventListener("load", () => {
 	resetText()
+	currentRealityLevel = 0
 })
 
-//
+// /////////////
 // FANTASY - LEVELS
-//
+// /////////////
 
 // VARIABLES
 const fantasyLevels = document.querySelectorAll("article:first-of-type section")
-// console.log(levels)
 let currentFantasyLevel = 0
 const stars = fantasyLevels[currentFantasyLevel].querySelectorAll("section div")
-// console.log(lvl1Stars)
 
 stars.forEach((a) => {
 	a.addEventListener("click", (event) => {
@@ -93,9 +130,9 @@ stars.forEach((a) => {
 	})
 })
 
-//
+// /////////////
 // SCROLL TRANSITION
-//
+// /////////////
 
 // VARIABLES
 let scrollArticles = false
@@ -127,4 +164,4 @@ const scrollTransition = () => {
 	}
 }
 
-// scrollTransition()
+scrollTransition()
