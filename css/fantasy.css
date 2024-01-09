@@ -17,9 +17,9 @@ article:first-of-type div {
 	width: 1em;
 	height: 1em;
 
-	background-color: #e5b874;
+	background-color: #fff9f9;
 	border-radius: 50%;
-	box-shadow: 0 0 1em 0.5em #da9863;
+	box-shadow: 0 0 1em 0.5em #7174c7;
 }
 
 article:first-of-type div:hover {

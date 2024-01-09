@@ -12,10 +12,10 @@ let currentLife = 0
 
 const checkLives = () => {
 	// Make sure that when the page loads the user doesn't instantly lose a life
-	if (lvl1Text.value.length == 0) {
+	if (textArea.value.length == 0) {
 	}
 	// If the user does not complete the level by typing all the text, they lose a life
-	else if (lvl1Text.value.length != taskText.length) {
+	else if (textArea.value.length != taskText.length) {
 		lives[currentLife].classList.add("loss")
 
 		currentLife++
@@ -109,11 +109,14 @@ const scrollTransition = () => {
 		checkLives()
 
 		// Don't scroll down until a random time between 10-20 seconds
-		const duration = Math.random() * 10000 + 10000
+		const duration = Math.random() * 1000 + 1000
 		console.log(duration)
 		setTimeout(scrollTransition, duration)
 	} else {
-		window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+		window.scrollTo({
+			top: document.body.scrollHeight,
+			behavior: "smooth",
+		})
 
 		scrollArticles = false
 

@@ -20,18 +20,32 @@ body {
 	padding: 0;
 
 	width: 100vw;
-	height: 200vh;
+	height: 2352px;
 
 	/* overflow: hidden; */
 
-	background: linear-gradient(
+	/* background: linear-gradient(
 		rgba(2, 0, 36, 1) 0%,
 		rgba(9, 9, 121, 1) 50%,
 		rgba(214, 248, 255, 1) 100%
-	);
+	); */
+	background: url("../img/background.jpg") no-repeat center top;
+	background-size: cover;
 
 	scroll-behavior: smooth;
 }
+
+/* #background-img {
+	position: absolute;
+
+	width: 100vw;
+	height: 100%;
+
+	background: url("../img/background.jpg") no-repeat center top;
+	background-size: cover;
+
+	z-index: -1;
+} */
 
 p {
 	margin: 0;
