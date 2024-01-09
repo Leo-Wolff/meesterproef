@@ -7,7 +7,7 @@ import realityData from "./database.js"
 //
 
 // VARIABLES
-const lives = document.querySelectorAll("main > section:first-of-type div")
+const lives = document.querySelectorAll("main > section:first-of-type img")
 let currentLife = 0
 
 const checkLives = () => {
@@ -16,7 +16,7 @@ const checkLives = () => {
 	}
 	// If the user does not complete the level by typing all the text, they lose a life
 	else if (textArea.value.length != taskText.length) {
-		lives[currentLife].classList.add("loss")
+		lives[currentLife].src = "img/life-lost.svg"
 
 		currentLife++
 	}

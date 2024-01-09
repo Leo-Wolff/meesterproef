@@ -68,11 +68,13 @@ article:first-of-type div.active {
 LAY-OUT
 ************* */
 article:first-of-type {
-	height: 100vh;
+	height: calc(2352px / 2);
 }
 
 article:last-of-type {
-	height: 100vh;
+	position: relative;
+
+	height: calc(2352px / 2);
 }
 
 /* *************
@@ -82,22 +84,12 @@ main > section:first-of-type {
 	display: flex;
 	gap: 1em;
 
-	position: absolute;
+	position: fixed;
 	top: 3vh;
 	right: 3vw;
 }
 
-main > section:first-of-type div {
+main > section:first-of-type img {
 	width: 3em;
 	height: 3em;
-
-	border: 5px solid transparent;
-	border-radius: 50%;
-
-	background-color: red;
-}
-
-main > section:first-of-type div.loss {
-	border: 5px solid red;
-	background: none;
 }
