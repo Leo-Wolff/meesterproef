@@ -202,7 +202,7 @@ showFantasyLevel()
 let scrollArticles = false
 let falseTimer
 let trueTimer
-let duration = Math.random() * 1000 + 1000
+let duration = Math.random() * 10000 + 5000
 
 const scrollTransition = () => {
 	clearTimeout(falseTimer)
@@ -215,8 +215,8 @@ const scrollTransition = () => {
 
 		checkLives()
 
-		// Don't scroll down until a random time between 10-20 seconds
-		duration = Math.random() * 1000 + 1000
+		// Don't scroll down until a random time between 5-10 seconds
+		duration = Math.random() * 10000 + 5000
 		console.log(duration)
 		falseTimer = setTimeout(scrollTransition, duration)
 	} else if (currentCharacter == taskText.length && scrollArticles == true) {
@@ -225,8 +225,8 @@ const scrollTransition = () => {
 		textArea.blur()
 		resetLevel()
 
-		// Don't scroll down until a random time between 10-20 seconds
-		duration = Math.random() * 1000 + 1000
+		// Don't scroll down until a random time between 5-10 seconds
+		duration = Math.random() * 10000 + 5000
 		console.log(duration)
 		falseTimer = setTimeout(scrollTransition, duration)
 	} else {

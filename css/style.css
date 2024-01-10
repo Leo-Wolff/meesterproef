@@ -1,15 +1,32 @@
 /* *************
 ROOT + FONTS
 ************* */
-/* @font-face {
-	font-family: "Cinzel";
-	src: url("../font/Cinzel/Cinzel-VariableFont_wght.ttf"), format("ttf");
+@font-face {
+	font-family: "Handlee";
+	src: url("../font/Handlee/Handlee-Regular.ttf"), format("ttf");
 	font-weight: normal;
 	font-style: normal;
-} */
+}
 
-/* :root {
-} */
+@font-face {
+	font-family: "Lobster";
+	src: url("../font/Lobster/Lobster-Regular.ttf"), format("ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Montserrat";
+	src: url("../font/Montserrat/Montserrat-VariableFont_wght.ttf"), format("ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+
+:root {
+	--heading-font: "Lobster", Optima, source-sans-pro, sans-serif;
+	--text-font: "Montserrat", Optima, source-sans-pro, sans-serif;
+	--task-font: "Handlee", Optima, source-sans-pro, sans-serif;
+}
 
 /* *************
 GENERAL STYLING
@@ -35,24 +52,19 @@ body {
 	scroll-behavior: smooth;
 }
 
-/* #background-img {
-	position: absolute;
-
-	width: 100vw;
-	height: 100%;
-
-	background: url("../img/background.jpg") no-repeat center top;
-	background-size: cover;
-
-	z-index: -1;
-} */
-
 p {
 	margin: 0;
 
 	text-indent: 1em;
 	font-size: calc(1em + 0.5vw);
 	color: white;
+
+	font-family: var(--text-font);
+}
+
+label,
+textarea {
+	font-family: var(--task-font);
 }
 
 /* Classlist related classes */
