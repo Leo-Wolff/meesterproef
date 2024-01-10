@@ -197,8 +197,8 @@ const scrollTransition = () => {
 
 		resetLevel()
 
-		// Don't scroll up until 25 seconds have passed to complete your task
-		trueTimer = setTimeout(scrollTransition, 15000)
+		// Don't scroll up until 30 seconds have passed to complete your task
+		trueTimer = setTimeout(scrollTransition, 30000)
 	}
 }
 
