@@ -2,7 +2,6 @@
 // DATABASE
 // /////////////
 import realityData from "./database.js"
-// console.log(realityData)
 
 // /////////////
 // LIVES
@@ -29,17 +28,66 @@ const checkLives = () => {
 // /////////////
 
 // VARIABLES
-let currentRealityLevel = 0
 const levels = document.querySelectorAll("article:last-of-type > section")
-const textArea = levels[currentRealityLevel].querySelector("textarea")
-const taskText = realityData[currentRealityLevel].taskText
+let currentRealityLevel = 0
+let textArea = levels[currentRealityLevel].querySelector("textarea")
+let taskText = realityData[currentRealityLevel].taskText
 let currentCharacter = 0
+let scrollTransitionInProgress = false
 
-// console.log(textArea)
-// console.log(taskText)
-// console.log(currentRealityLevel)
+// TASK BEHAVIOUR
+const typeText = (event) => {
+	if (/^[a-zA-Z]$/.test(event.key)) {
+		// If currentCharacter is smaller than taskText.length than there will be more text to type
+		if (currentCharacter < taskText.length) {
+			// Adds the next character to the existing text
+			textArea.value += taskText.charAt(currentCharacter)
+
+			// Increase currentCharacter so that the next iteration of the function can type the next character
+			currentCharacter++
+		} else if (
+			currentCharacter == taskText.length &&
+			!scrollTransitionInProgress
+		) {
+			// Set the flag to indicate that scrollTransition is in progress
+			scrollTransitionInProgress = true
+
+			// Wait for 2 seconds before initiating scrollTransition
+			setTimeout(() => {
+				scrollTransitionInProgress = false // Reset the flag
+				scrollTransition()
+			}, 1000)
+		}
+	} else {
+		// Prevent other keys from triggering default behavior
+		event.preventDefault()
+	}
+}
+
+textArea.addEventListener("keydown", typeText)
 
 // LEVEL VISIBILITY
+const generateRandomLevel = () => {
+	let randomLevel = Math.floor(Math.random() * levels.length)
+
+	if (randomLevel == currentRealityLevel) {
+		return generateRandomLevel() // Try again
+	} else {
+		currentRealityLevel = randomLevel
+
+		// Update
+		textArea = levels[currentRealityLevel].querySelector("textarea")
+		taskText = realityData[currentRealityLevel].taskText
+
+		textArea.removeEventListener("keydown", typeText)
+		textArea.addEventListener("keydown", typeText)
+
+		console.log(currentRealityLevel)
+	}
+}
+
+generateRandomLevel()
+
 const showLevel = () => {
 	levels.forEach((section, index) => {
 		if (index !== currentRealityLevel) {
@@ -52,54 +100,26 @@ const showLevel = () => {
 
 showLevel()
 
-const generateRandomLevel = () => {
-	let randomLevel = Math.floor(Math.random() * levels.length)
-
-	if (randomLevel == currentRealityLevel) {
-		return generateRandomLevel() // Try again
-	} else {
-		currentRealityLevel = randomLevel
-	}
-
-	console.log(currentRealityLevel)
-}
-
-// TASK BEHAVIOUR
-textArea.addEventListener("keydown", (event) => {
-	if (/^[a-zA-Z]$/.test(event.key)) {
-		// If currentCharacter is smaller than taskText.length than there will be more text to type
-		if (currentCharacter < taskText.length) {
-			// Adds the next character to the existing text
-			textArea.value += taskText.charAt(currentCharacter)
-
-			// Increase currentCharacter so that the next iteration of the function can type the next character
-			currentCharacter++
-		} else if (currentCharacter == taskText.length) {
-			scrollArticles = false
-
-			generateRandomLevel()
-			showLevel()
-
-			// Reset text area and go back to fantasy
-			resetText()
-			scrollTransition()
-		}
-	} else {
-		// Prevent other keys from triggering default behavior
-		event.preventDefault()
-	}
-})
-
-// Reset function for the whole level
+// Reset function for the taskText
 const resetText = () => {
 	textArea.value = ""
 	currentCharacter = 0
 }
 
+const resetLevel = () => {
+	resetText()
+	generateRandomLevel()
+	showLevel()
+
+	clearTimeout(falseTimer)
+	clearTimeout(trueTimer)
+}
+
 // Reset the level when the page is loaded
 window.addEventListener("load", () => {
 	resetText()
-	currentRealityLevel = 0
+	generateRandomLevel()
+	showLevel()
 })
 
 // /////////////
@@ -136,8 +156,14 @@ stars.forEach((a) => {
 
 // VARIABLES
 let scrollArticles = false
+let falseTimer
+let trueTimer
+let duration = Math.random() * 1000 + 1000
 
 const scrollTransition = () => {
+	clearTimeout(falseTimer)
+	clearTimeout(trueTimer)
+
 	if (scrollArticles == false) {
 		window.scrollTo({ top: 0, behavior: "smooth" })
 
@@ -146,22 +172,34 @@ const scrollTransition = () => {
 		checkLives()
 
 		// Don't scroll down until a random time between 10-20 seconds
-		const duration = Math.random() * 1000 + 1000
+		duration = Math.random() * 1000 + 1000
 		console.log(duration)
-		setTimeout(scrollTransition, duration)
+		falseTimer = setTimeout(scrollTransition, duration)
+	} else if (currentCharacter == taskText.length && scrollArticles == true) {
+		window.scrollTo({ top: 0, behavior: "smooth" })
+
+		textArea.blur()
+		resetLevel()
+
+		// Don't scroll down until a random time between 10-20 seconds
+		duration = Math.random() * 1000 + 1000
+		console.log(duration)
+		falseTimer = setTimeout(scrollTransition, duration)
 	} else {
 		window.scrollTo({
 			top: document.body.scrollHeight,
 			behavior: "smooth",
 		})
 
+		textArea.blur()
+
 		scrollArticles = false
 
-		resetText()
+		resetLevel()
 
-		// Don't scroll up until 15 seconds have passed to complete your task
-		setTimeout(scrollTransition, 15000)
+		// Don't scroll up until 25 seconds have passed to complete your task
+		trueTimer = setTimeout(scrollTransition, 15000)
 	}
 }
 
-scrollTransition()
+// scrollTransition()

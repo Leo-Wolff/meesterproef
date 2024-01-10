@@ -3,10 +3,10 @@ const realityData = {
 		taskText: "Dear Teacher, \n \n I Adrien",
 	},
 	1: {
-		taskText: "Dear Teacher, \n \n I Adrien",
+		taskText: "Dear, \n \n I Adrien",
 	},
 	2: {
-		taskText: "Dear Teacher, \n \n I Adrien",
+		taskText: "Teacher, \n \n I",
 	},
 }
 
