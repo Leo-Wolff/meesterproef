@@ -246,4 +246,4 @@ const scrollTransition = () => {
 	}
 }
 
-// scrollTransition()
+scrollTransition()
