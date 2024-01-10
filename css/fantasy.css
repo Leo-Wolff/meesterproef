@@ -5,6 +5,10 @@ article:first-of-type > section {
 	transform: translateX(-50%);
 	bottom: 2em;
 
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	width: 50vw;
 	height: calc(100vh - 4em);
 }
@@ -24,11 +28,9 @@ article:first-of-type div:hover {
 	cursor: pointer;
 }
 
-article:first-of-type > section:first-of-type {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
+/* *************
+LEVEL 1
+************* */
 
 article:first-of-type > section:first-of-type div:first-of-type {
 	transform: rotate(calc(1 * 360deg / 8)) translate(15vw);
@@ -60,4 +62,232 @@ article:first-of-type > section:first-of-type div:nth-of-type(7) {
 
 article:first-of-type > section:first-of-type div:nth-of-type(8) {
 	transform: rotate(calc(8 * 360deg / 8)) translate(15vw);
+}
+
+/* *************
+LEVEL 2
+************* */
+/* head */
+article:first-of-type > section:nth-of-type(2) div:first-of-type {
+	transform: translate(-1.5vw, -29vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(2) {
+	transform: translate(1.5vw, -29vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(3) {
+	transform: translate(-4vw, -21.5vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(4) {
+	transform: translate(4vw, -21.5vh);
+}
+
+/* beak */
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(5) {
+	transform: translate(0, -11.5vh);
+}
+
+/* body */
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(6) {
+	transform: translate(-4vw, -9vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(7) {
+	transform: translate(4vw, -9vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(8) {
+	transform: translate(-6.5vw, -1.5vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(9) {
+	transform: translate(6.5vw, -1.5vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(10) {
+	transform: translate(-6.5vw, 9vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(11) {
+	transform: translate(6.5vw, 9vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(12) {
+	transform: translate(-5vw, 17.5vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(13) {
+	transform: translate(5vw, 17.5vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(14) {
+	transform: translate(0, 30vh);
+}
+
+/* wings */
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(15) {
+	transform: translate(20vw, -10vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(16) {
+	transform: translate(-20vw, -10vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(17) {
+	transform: translate(12.5vw, 10vh);
+}
+
+article:first-of-type > section:nth-of-type(2) div:nth-of-type(18) {
+	transform: translate(-12.5vw, 10vh);
+}
+
+/* *************
+LEVEL 3
+************* */
+
+article:first-of-type > section:nth-of-type(3) div:first-of-type {
+	transform: translate(0, -20vh);
+}
+
+article:first-of-type > section:nth-of-type(3) div:nth-of-type(2) {
+	transform: translate(-15vw, -25vh);
+}
+
+article:first-of-type > section:nth-of-type(3) div:nth-of-type(3) {
+	transform: translate(-15vw, 0);
+}
+
+article:first-of-type > section:nth-of-type(3) div:last-of-type {
+	transform: translate(0, 20vh);
+}
+
+/* *************
+LEVEL 4
+************* */
+
+/* iris */
+article:first-of-type > section:nth-of-type(4) div:first-of-type {
+	transform: rotate(calc(1 * 360deg / 8)) translate(10vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(2) {
+	transform: rotate(calc(2 * 360deg / 8)) translate(10vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(3) {
+	transform: rotate(calc(3 * 360deg / 8)) translate(10vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(4) {
+	transform: rotate(calc(4 * 360deg / 8)) translate(10vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(5) {
+	transform: rotate(calc(5 * 360deg / 8)) translate(10vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(6) {
+	transform: rotate(calc(6 * 360deg / 8)) translate(10vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(7) {
+	transform: rotate(calc(7 * 360deg / 8)) translate(10vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(8) {
+	transform: rotate(calc(8 * 360deg / 8)) translate(10vw);
+}
+
+/* eye */
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(9) {
+	transform: translate(20vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(10) {
+	transform: translate(-20vw);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(11) {
+	transform: translate(12.5vw, 15vh);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(12) {
+	transform: translate(-12.5vw, 15vh);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(13) {
+	transform: translate(12.5vw, -15vh);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(14) {
+	transform: translate(-12.5vw, -15vh);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(15) {
+	transform: translate(0, 22.5vh);
+}
+
+article:first-of-type > section:nth-of-type(4) div:nth-of-type(16) {
+	transform: translate(0, -22.5vh);
+}
+
+/* *************
+LEVEL 5
+************* */
+
+/* blade */
+article:first-of-type > section:nth-of-type(5) div:first-of-type {
+	transform: translate(0, -30vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(2) {
+	transform: translate(-5vw, -22.5vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(3) {
+	transform: translate(5vw, -22.5vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(4) {
+	transform: translate(-5vw, 7.5vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(5) {
+	transform: translate(5vw, 7.5vh);
+}
+
+/* handle */
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(6) {
+	transform: translate(12.5vw, 7.5vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(7) {
+	transform: translate(-12.5vw, 7.5vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(8) {
+	transform: translate(12.5vw, 17.5vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(9) {
+	transform: translate(-12.5vw, 17.5vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(10) {
+	transform: translate(2.5vw, 17.5vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(11) {
+	transform: translate(-2.5vw, 17.5vh);
+}
+
+/* pommel */
+article:first-of-type > section:nth-of-type(5) div:nth-of-type(12) {
+	transform: translate(2.5vw, 30vh);
+}
+
+article:first-of-type > section:nth-of-type(5) div:last-of-type {
+	transform: translate(-2.5vw, 30vh);
 }

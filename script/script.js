@@ -127,28 +127,72 @@ window.addEventListener("load", () => {
 // /////////////
 
 // VARIABLES
-const fantasyLevels = document.querySelectorAll("article:first-of-type section")
+const fantasyLevels = document.querySelectorAll(
+	"article:first-of-type > section"
+)
 let currentFantasyLevel = 0
-const stars = fantasyLevels[currentFantasyLevel].querySelectorAll("section div")
+let stars = fantasyLevels[currentFantasyLevel].querySelectorAll("section div")
+let text = fantasyLevels[currentFantasyLevel].querySelectorAll("p")
+
+const starSelect = (event) => {
+	// Add the "active" class to the clicked star
+	event.target.classList.add("active")
+
+	// Check if all stars have the "active" class
+	if (Array.from(stars).every((b) => b.classList.contains("active"))) {
+		fantasyLevels[currentFantasyLevel]
+			.querySelector("section:first-of-type")
+			.classList.add("hidden")
+		fantasyLevels[currentFantasyLevel]
+			.querySelector("section:last-of-type")
+			.classList.remove("hidden")
+	}
+}
 
 stars.forEach((a) => {
-	a.addEventListener("click", (event) => {
-		// Add the "active" class to the clicked star
-		event.target.classList.add("active")
-
-		// Check if all stars have the "active" class
-		if (Array.from(stars).every((b) => b.classList.contains("active"))) {
-			fantasyLevels[currentFantasyLevel]
-				.querySelector("section:first-of-type")
-				.classList.add("hidden")
-			fantasyLevels[currentFantasyLevel]
-				.querySelector("section:last-of-type")
-				.classList.remove("hidden")
-
-			currentFantasyLevel++
-		}
-	})
+	a.addEventListener("click", starSelect)
 })
+
+const nextLevel = () => {
+	if (
+		!fantasyLevels[4]
+			.querySelector("section:last-of-type")
+			.classList.contains("hidden")
+	) {
+		alert("ya did it!")
+	} else {
+		currentFantasyLevel++
+
+		stars = fantasyLevels[currentFantasyLevel].querySelectorAll("section div")
+		text = fantasyLevels[currentFantasyLevel].querySelectorAll("p")
+
+		showFantasyLevel()
+
+		stars.forEach((a) => {
+			a.removeEventListener("click", starSelect)
+		})
+		stars.forEach((a) => {
+			a.addEventListener("click", starSelect)
+		})
+
+		console.log(currentFantasyLevel)
+	}
+}
+
+const showFantasyLevel = () => {
+	fantasyLevels.forEach((section, index) => {
+		if (index !== currentFantasyLevel) {
+			section.classList.add("hidden")
+		} else {
+			section.classList.remove("hidden")
+		}
+		text.forEach((a) => {
+			a.addEventListener("click", nextLevel)
+		})
+	})
+}
+
+showFantasyLevel()
 
 // /////////////
 // SCROLL TRANSITION
