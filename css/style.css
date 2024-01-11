@@ -36,30 +36,22 @@ body {
 	margin: 0;
 	padding: 0;
 
+	scroll-behavior: smooth;
 	width: 100vw;
 	height: 2352px;
-
 	overflow: hidden;
 
-	/* background: linear-gradient(
-		rgba(2, 0, 36, 1) 0%,
-		rgba(9, 9, 121, 1) 50%,
-		rgba(214, 248, 255, 1) 100%
-	); */
 	background: url("../img/background.jpg") no-repeat center top;
 	background-size: cover;
-
-	scroll-behavior: smooth;
 }
 
 p {
 	margin: 0;
 
-	text-indent: 1em;
-	font-size: calc(1em + 0.5vw);
-	color: white;
-
 	font-family: var(--text-font);
+	font-size: calc(1em + 0.5vw);
+	text-indent: 1em;
+	color: white;
 }
 
 label,

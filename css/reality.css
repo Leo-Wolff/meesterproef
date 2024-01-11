@@ -1,14 +1,12 @@
 article:last-of-type > section {
 	position: absolute;
 	left: 50%;
-	transform: translateX(-50%);
 	bottom: 4em;
+	transform: translateX(-50%);
 
 	width: 50vw;
 	height: 800px;
 
-	/* background: rgba(255, 0, 0, 0.35) url("../img/paper.svg") no-repeat center
-		center; */
 	background: url("../img/paper.svg") no-repeat center center;
 }
 
@@ -22,8 +20,6 @@ article:last-of-type > section > form {
 	height: calc(800px - 5em);
 
 	font-size: 1.5em;
-
-	/* background-color: blue; */
 }
 
 article:last-of-type > section > form textarea {
