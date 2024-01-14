@@ -8,7 +8,8 @@ import realityData from "./database.js"
 // /////////////
 
 // VARIABLES
-const lives = document.querySelectorAll("main > section:first-of-type img")
+const livesSection = document.querySelector("main > section:first-of-type")
+const lives = livesSection.querySelectorAll("img")
 let currentLife = 0
 
 const checkLives = () => {
@@ -33,7 +34,6 @@ let currentRealityLevel = 0
 let textArea = levels[currentRealityLevel].querySelector("textarea")
 let taskText = realityData[currentRealityLevel].taskText
 let currentCharacter = 0
-let scrollTransitionInProgress = false
 
 // TASK BEHAVIOUR
 const typeText = (event) => {
@@ -47,20 +47,14 @@ const typeText = (event) => {
 			currentCharacter++
 		} else if (
 			currentCharacter == taskText.length &&
-			!scrollTransitionInProgress
+			!realityArticle.classList.contains("hidden")
 		) {
-			// Set the flag to indicate that scrollTransition is in progress
-			scrollTransitionInProgress = true
-
-			// Wait for 2 seconds before initiating scrollTransition
-			setTimeout(() => {
-				scrollTransitionInProgress = false // Reset the flag
-				scrollTransition()
-			}, 1000)
+			console.log("level complete")
+			toFantasy()
+		} else {
+			// Prevent other keys from triggering default behavior
+			event.preventDefault()
 		}
-	} else {
-		// Prevent other keys from triggering default behavior
-		event.preventDefault()
 	}
 }
 
@@ -110,9 +104,6 @@ const resetLevel = () => {
 	resetText()
 	generateRandomLevel()
 	showLevel()
-
-	clearTimeout(falseTimer)
-	clearTimeout(trueTimer)
 }
 
 // Reset the level when the page is loaded
@@ -195,55 +186,47 @@ const showFantasyLevel = () => {
 showFantasyLevel()
 
 // /////////////
-// SCROLL TRANSITION
+// TRANSITIONS
 // /////////////
 
 // VARIABLES
-let scrollArticles = false
-let falseTimer
-let trueTimer
+let fantasyArticle = document.querySelector("article:first-of-type")
+let realityArticle = document.querySelector("article:last-of-type")
+let footer = document.querySelector("footer")
+
 let duration = Math.random() * 10000 + 5000
 
-const scrollTransition = () => {
-	clearTimeout(falseTimer)
-	clearTimeout(trueTimer)
-
-	if (scrollArticles == false) {
-		window.scrollTo({ top: 0, behavior: "smooth" })
-
-		scrollArticles = true
-
-		checkLives()
-
-		// Don't scroll down until a random time between 5-10 seconds
-		duration = Math.random() * 10000 + 5000
-		console.log(duration)
-		falseTimer = setTimeout(scrollTransition, duration)
-	} else if (currentCharacter == taskText.length && scrollArticles == true) {
-		window.scrollTo({ top: 0, behavior: "smooth" })
-
-		textArea.blur()
-		resetLevel()
-
-		// Don't scroll down until a random time between 5-10 seconds
-		duration = Math.random() * 10000 + 5000
-		console.log(duration)
-		falseTimer = setTimeout(scrollTransition, duration)
-	} else {
-		window.scrollTo({
-			top: document.body.scrollHeight,
-			behavior: "smooth",
-		})
-
-		textArea.blur()
-
-		scrollArticles = false
-
-		resetLevel()
-
-		// Don't scroll up until 30 seconds have passed to complete your task
-		trueTimer = setTimeout(scrollTransition, 30000)
-	}
+const navToReality = () => {
+	footer.classList.remove("hidden")
 }
 
-scrollTransition()
+const ToReality = () => {
+	resetLevel()
+
+	console.log("To Reality")
+
+	livesSection.classList.remove("hidden")
+	realityArticle.classList.remove("hidden")
+	footer.classList.add("hidden")
+	fantasyArticle.classList.add("hidden")
+
+	setTimeout(toFantasy, 30000)
+}
+
+footer.addEventListener("click", () => {
+	ToReality()
+})
+
+const toFantasy = () => {
+	checkLives()
+
+	console.log("To Fantasy")
+
+	livesSection.classList.add("hidden")
+	realityArticle.classList.add("hidden")
+	fantasyArticle.classList.remove("hidden")
+
+	duration = Math.random() * 10000 + 5000
+	console.log(duration)
+	setTimeout(navToReality, duration)
+}

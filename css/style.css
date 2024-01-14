@@ -36,13 +36,9 @@ body {
 	margin: 0;
 	padding: 0;
 
-	scroll-behavior: smooth;
 	width: 100vw;
 	height: 2352px;
 	overflow: hidden;
-
-	background: url("../img/background.jpg") no-repeat center top;
-	background-size: cover;
 }
 
 p {
@@ -73,12 +69,37 @@ LAY-OUT
 ************* */
 article:first-of-type {
 	height: calc(2352px / 2);
+
+	background: url("../img/fantasy-bg.jpg") no-repeat center top;
+	background-size: cover;
 }
 
 article:last-of-type {
 	position: relative;
 
 	height: calc(2352px / 2);
+
+	background: url("../img/reality-bg.jpg") no-repeat center top;
+	background-size: cover;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+
+	border-radius: 20em 20em 0 0;
+
+	width: 100vw;
+	height: 10vh;
+
+	background-color: rgba(0, 0, 0, 0.75);
+}
+
+footer nav button {
+	position: relative;
+	top: 1em;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 /* *************
@@ -91,6 +112,8 @@ main > section:first-of-type {
 	position: fixed;
 	top: 3vh;
 	right: 3vw;
+
+	z-index: 5;
 }
 
 main > section:first-of-type img {

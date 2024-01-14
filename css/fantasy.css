@@ -226,14 +226,6 @@ article:first-of-type > section:nth-of-type(4) div:nth-of-type(14) {
 	transform: translate(-12.5vw, -15vh);
 }
 
-article:first-of-type > section:nth-of-type(4) div:nth-of-type(15) {
-	transform: translate(0, 22.5vh);
-}
-
-article:first-of-type > section:nth-of-type(4) div:nth-of-type(16) {
-	transform: translate(0, -22.5vh);
-}
-
 /* *************
 LEVEL 5
 ************* */
