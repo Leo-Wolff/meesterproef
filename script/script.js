@@ -29,11 +29,11 @@ const checkLives = () => {
 // /////////////
 
 // VARIABLES
-const levels = document.querySelectorAll("article:last-of-type > section")
-let currentRealityLevel = 0
-let textArea = levels[currentRealityLevel].querySelector("textarea")
-let taskText = realityData[currentRealityLevel].taskText
+const tasks = document.querySelectorAll("article:last-of-type > section")
+let currentTask = 0
 let currentCharacter = 0
+let textArea = tasks[currentTask].querySelector("textarea")
+let taskText = realityData[currentTask].taskText
 
 // TASK BEHAVIOUR
 const typeText = (event) => {
@@ -49,7 +49,7 @@ const typeText = (event) => {
 			currentCharacter == taskText.length &&
 			!realityArticle.classList.contains("hidden")
 		) {
-			console.log("level complete")
+			console.log("Task complete")
 			toFantasy()
 		} else {
 			// Prevent other keys from triggering default behavior
@@ -62,29 +62,28 @@ textArea.addEventListener("keydown", typeText)
 
 // LEVEL VISIBILITY
 const generateRandomLevel = () => {
-	let randomLevel = Math.floor(Math.random() * levels.length)
+	let randomLevel = Math.floor(Math.random() * tasks.length)
 
-	if (randomLevel == currentRealityLevel) {
+	if (randomLevel == currentTask) {
 		return generateRandomLevel() // Try again
 	} else {
-		currentRealityLevel = randomLevel
+		currentTask = randomLevel
 
 		// Update
-		textArea = levels[currentRealityLevel].querySelector("textarea")
-		taskText = realityData[currentRealityLevel].taskText
-
+		textArea = tasks[currentTask].querySelector("textarea")
+		taskText = realityData[currentTask].taskText
 		textArea.removeEventListener("keydown", typeText)
 		textArea.addEventListener("keydown", typeText)
 
-		console.log(currentRealityLevel)
+		console.log("Current task:", currentTask)
 	}
 }
 
 generateRandomLevel()
 
 const showLevel = () => {
-	levels.forEach((section, index) => {
-		if (index !== currentRealityLevel) {
+	tasks.forEach((section, index) => {
+		if (index !== currentTask) {
 			section.classList.add("hidden")
 		} else {
 			section.classList.remove("hidden")
@@ -118,12 +117,10 @@ window.addEventListener("load", () => {
 // /////////////
 
 // VARIABLES
-const fantasyLevels = document.querySelectorAll(
-	"article:first-of-type > section"
-)
-let currentFantasyLevel = 0
-let stars = fantasyLevels[currentFantasyLevel].querySelectorAll("section div")
-let text = fantasyLevels[currentFantasyLevel].querySelectorAll("p")
+const chapters = document.querySelectorAll("article:first-of-type > section")
+let currentChapter = 0
+let stars = chapters[currentChapter].querySelectorAll("section div")
+let chapterText = chapters[currentChapter].querySelectorAll("p")
 
 const starSelect = (event) => {
 	// Add the "active" class to the clicked star
@@ -131,10 +128,10 @@ const starSelect = (event) => {
 
 	// Check if all stars have the "active" class
 	if (Array.from(stars).every((b) => b.classList.contains("active"))) {
-		fantasyLevels[currentFantasyLevel]
+		chapters[currentChapter]
 			.querySelector("section:first-of-type")
 			.classList.add("hidden")
-		fantasyLevels[currentFantasyLevel]
+		chapters[currentChapter]
 			.querySelector("section:last-of-type")
 			.classList.remove("hidden")
 	}
@@ -144,20 +141,20 @@ stars.forEach((a) => {
 	a.addEventListener("click", starSelect)
 })
 
-const nextLevel = () => {
+const nextChapter = () => {
 	if (
-		!fantasyLevels[4]
+		!chapters[4]
 			.querySelector("section:last-of-type")
 			.classList.contains("hidden")
 	) {
 		alert("ya did it!")
 	} else {
-		currentFantasyLevel++
+		currentChapter++
 
-		stars = fantasyLevels[currentFantasyLevel].querySelectorAll("section div")
-		text = fantasyLevels[currentFantasyLevel].querySelectorAll("p")
+		stars = chapters[currentChapter].querySelectorAll("section div")
+		chapterText = chapters[currentChapter].querySelectorAll("p")
 
-		showFantasyLevel()
+		showChapter()
 
 		stars.forEach((a) => {
 			a.removeEventListener("click", starSelect)
@@ -166,24 +163,24 @@ const nextLevel = () => {
 			a.addEventListener("click", starSelect)
 		})
 
-		console.log(currentFantasyLevel)
+		console.log(currentChapter)
 	}
 }
 
-const showFantasyLevel = () => {
-	fantasyLevels.forEach((section, index) => {
-		if (index !== currentFantasyLevel) {
+const showChapter = () => {
+	chapters.forEach((section, index) => {
+		if (index !== currentChapter) {
 			section.classList.add("hidden")
 		} else {
 			section.classList.remove("hidden")
 		}
-		text.forEach((a) => {
-			a.addEventListener("click", nextLevel)
+		chapterText.forEach((a) => {
+			a.addEventListener("click", nextChapter)
 		})
 	})
 }
 
-showFantasyLevel()
+showChapter()
 
 // /////////////
 // TRANSITIONS
