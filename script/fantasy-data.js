@@ -1,4 +1,4 @@
-const chapterCardData = {
+const fantasyData = {
 	0: {
 		chapterNumber: 1,
 		chapterTitle: "A New World",
@@ -12,4 +12,4 @@ const chapterCardData = {
 	},
 }
 
-export default chapterCardData
+export default fantasyData

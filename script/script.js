@@ -1,8 +1,7 @@
 // /////////////
 // DATABASE
 // /////////////
-import chapterCardData from "./card-data.js"
-import chapterTextData from "./chapter-data.js"
+import fantasyData from "./fantasy-data.js"
 import realityData from "./reality-data.js"
 
 // /////////////
@@ -129,9 +128,10 @@ let chapterIntroduction = document.querySelector("article:first-of-type > div")
 let stars = chapters[currentChapter].querySelectorAll(
 	"section:first-of-type div"
 )
-let chapterText = chapters[currentChapter].querySelectorAll(
-	"section:last-of-type p"
-)
+let chapterBook = chapters[currentChapter].querySelector("section:last-of-type")
+let pages = chapterBook.querySelectorAll("img:not(section > button > img)")
+let navButtons = chapterBook.querySelectorAll("button")
+let pagesIndex = 0
 
 const starSelect = (event) => {
 	// Add the "active" class to the clicked star
@@ -144,13 +144,7 @@ const starSelect = (event) => {
 			star.classList.add("hidden")
 		})
 
-		chapters[currentChapter]
-			.querySelector("section:last-of-type")
-			.classList.remove("hidden")
-		// // Iterate over each paragraph in chapterText and remove the "hidden" class
-		// chapterText.forEach((paragraph) => {
-		// 	paragraph.classList.remove("hidden")
-		// })
+		chapterBook.classList.remove("hidden")
 	}
 }
 
@@ -168,9 +162,8 @@ const nextChapter = () => {
 		stars = chapters[currentChapter].querySelectorAll(
 			"section:first-of-type div"
 		)
-		chapterText = chapters[currentChapter].querySelectorAll(
-			"section:last-of-type p"
-		)
+		chapterBook = chapters[currentChapter].querySelector("section:last-of-type")
+		pages = chapterBook.querySelectorAll("img:not(section > button > img)")
 
 		showChapter()
 
@@ -178,20 +171,20 @@ const nextChapter = () => {
 			a.removeEventListener("click", starSelect)
 		})
 
+		pageNavigation()
+
 		console.log(currentChapter)
 	}
 }
 
-const updateData = () => {
-	// Chapter card
+const updateIntro = () => {
 	chapterIntroduction.querySelector(
 		"p:first-of-type"
-	).innerHTML = `Chapter ${chapterCardData[currentChapter].chapterNumber}
-		`
+	).innerHTML = `Chapter ${fantasyData[currentChapter].chapterNumber}`
 	chapterIntroduction.querySelector("h2").innerHTML =
-		chapterCardData[currentChapter].chapterTitle
+		fantasyData[currentChapter].chapterTitle
 	chapterIntroduction.querySelector("p:last-of-type").innerHTML =
-		chapterCardData[currentChapter].chapterDescription
+		fantasyData[currentChapter].chapterDescription
 }
 
 const introEvent = () => {
@@ -205,6 +198,53 @@ const introEvent = () => {
 	console.log("Chapter timer:", duration)
 	setTimeout(navToReality, duration)
 }
+
+const pageNavigation = () => {
+	pages.forEach((a, index) => {
+		if (index !== pagesIndex) {
+			a.classList.add("hidden")
+		} else {
+			a.classList.remove("hidden")
+		}
+	})
+
+	if (pagesIndex > 0) {
+		navButtons[0].classList.remove("hidden")
+	} else {
+		navButtons[0].classList.add("hidden")
+	}
+
+	if (pagesIndex < pages.length - 1) {
+		navButtons[1].classList.remove("hidden")
+	} else {
+		navButtons[1].classList.add("hidden")
+		navButtons[2].classList.remove("hidden")
+	}
+}
+
+navButtons[0].addEventListener("click", () => {
+	if (pagesIndex > 0) {
+		pagesIndex--
+
+		pageNavigation()
+	} else {
+		navButtons[0].classList.add("hidden")
+		navButtons[1].classList.remove("hidden")
+	}
+})
+
+navButtons[1].addEventListener("click", () => {
+	if (pagesIndex < pages.length - 1) {
+		pagesIndex++
+
+		pageNavigation()
+	} else {
+		navButtons[1].classList.add("hidden")
+		navButtons[0].classList.remove("hidden")
+	}
+})
+
+pageNavigation()
 
 const showChapter = () => {
 	// Show current chapter
@@ -222,11 +262,9 @@ const showChapter = () => {
 	chapterButton.removeEventListener("click", introEvent)
 	chapterButton.addEventListener("click", introEvent)
 
-	chapterText.forEach((a) => {
-		a.addEventListener("click", nextChapter)
-	})
+	navButtons[2].addEventListener("click", nextChapter)
 
-	updateData()
+	updateIntro()
 }
 
 showChapter()
@@ -291,22 +329,26 @@ const startDynamicAnimation = (
 	let totalDuration = animationDuration * iterations
 	element.style.animationDuration = `${animationDuration}ms`
 
-	const animate = () => {
-		setTimeout(() => {
-			element.classList.add(animationName)
-
+	if (chapterIntroduction.classList.contains("hidden")) {
+		const animate = () => {
 			setTimeout(() => {
-				element.classList.remove(animationName)
-				animate()
-			}, totalDuration)
-		}, totalDelay)
+				element.classList.add(animationName)
 
-		if (totalDelay == 0 + animationDelay) {
-			totalDelay = 16000
+				setTimeout(() => {
+					element.classList.remove(animationName)
+					animate()
+				}, totalDuration)
+			}, totalDelay)
+
+			if (totalDelay == 0 + animationDelay) {
+				totalDelay = 16000
+			}
+			totalDelay = Math.max(totalDelay / 2, 0.1)
 		}
-		totalDelay = Math.max(totalDelay / 2, 0.1)
-	}
 
-	// Start the animation initially
-	animate()
+		// Start the animation initially
+		animate()
+	} else if (!chapterIntroduction.classList.contains("hidden")) {
+		return
+	}
 }
