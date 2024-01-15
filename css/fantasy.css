@@ -17,12 +17,12 @@ article:first-of-type div {
 	position: absolute;
 
 	border-radius: 50%;
-	box-shadow: 0 0 1em 0.5em #7174c7;
+	box-shadow: 0 0 1em 0.5em #e9cc7d;
 
 	width: 1em;
 	height: 1em;
 
-	background-color: #fff9f9;
+	background-color: #efefef;
 }
 
 article:first-of-type div:hover {
