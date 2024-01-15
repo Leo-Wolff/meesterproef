@@ -39,6 +39,8 @@ body {
 	width: 100vw;
 	height: 2352px;
 	overflow: hidden;
+
+	background-color: #130d17;
 }
 
 p {
@@ -107,6 +109,10 @@ footer:hover {
 	transition: 0.5s ease-in-out;
 }
 
+footer.blink:hover {
+	animation: none; /* Disable blink animation on hover */
+}
+
 footer nav {
 	display: flex;
 	justify-content: center;
@@ -125,7 +131,7 @@ footer nav img {
 }
 
 footer nav p {
-	font-size: 1.5em;
+	font-size: 1.25em;
 	font-weight: bold;
 	color: #e9cc7d;
 }

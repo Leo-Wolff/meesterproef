@@ -30,6 +30,8 @@ const checkLives = () => {
 
 // VARIABLES
 const tasks = document.querySelectorAll("article:last-of-type > section")
+let footer = document.querySelector("footer")
+let footerText = footer.querySelector("p")
 let currentTask = 0
 let currentCharacter = 0
 let textArea = tasks[currentTask].querySelector("textarea")
@@ -89,6 +91,8 @@ const showLevel = () => {
 			section.classList.remove("hidden")
 		}
 	})
+
+	footerText.innerHTML = realityData[currentTask].taskDescription
 }
 
 showLevel()
@@ -189,17 +193,24 @@ showChapter()
 // VARIABLES
 let fantasyArticle = document.querySelector("article:first-of-type")
 let realityArticle = document.querySelector("article:last-of-type")
-let footer = document.querySelector("footer")
-
 let duration = Math.random() * 10000 + 5000
 
 const navToReality = () => {
-	footer.classList.remove("hidden")
-}
-
-const ToReality = () => {
 	resetLevel()
 
+	console.log("Navigation revealed")
+
+	footer.classList.remove("hidden")
+
+	startDynamicAnimation(fantasyArticle, "shake", 500, 4, 0)
+	startDynamicAnimation(footer, "blink", 10000, 1, 2000)
+}
+
+// console.log("Chapter timer:", duration)
+// setTimeout(navToReality, duration)
+setTimeout(navToReality, 5000)
+
+const ToReality = () => {
 	console.log("To Reality")
 
 	livesSection.classList.remove("hidden")
@@ -207,7 +218,7 @@ const ToReality = () => {
 	footer.classList.add("hidden")
 	fantasyArticle.classList.add("hidden")
 
-	setTimeout(toFantasy, 30000)
+	setTimeout(toFantasy, 3000)
 }
 
 footer.addEventListener("click", () => {
@@ -224,6 +235,41 @@ const toFantasy = () => {
 	fantasyArticle.classList.remove("hidden")
 
 	duration = Math.random() * 10000 + 5000
-	console.log(duration)
+	console.log("Chapter timer:", duration)
 	setTimeout(navToReality, duration)
+}
+
+// /////////////
+// ANIMATION
+// /////////////
+
+const startDynamicAnimation = (
+	element,
+	animationName,
+	animationDuration,
+	iterations,
+	animationDelay
+) => {
+	let totalDelay = 0 + animationDelay
+	let totalDuration = animationDuration * iterations
+	element.style.animationDuration = `${animationDuration}ms`
+
+	const animate = () => {
+		setTimeout(() => {
+			element.classList.add(animationName)
+
+			setTimeout(() => {
+				element.classList.remove(animationName)
+				animate()
+			}, totalDuration)
+		}, totalDelay)
+
+		if (totalDelay == 0 + animationDelay) {
+			totalDelay = 16000
+		}
+		totalDelay = Math.max(totalDelay / 2, 0.1)
+	}
+
+	// Start the animation initially
+	animate()
 }
