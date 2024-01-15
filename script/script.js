@@ -123,8 +123,15 @@ window.addEventListener("load", () => {
 // VARIABLES
 const chapters = document.querySelectorAll("article:first-of-type > section")
 let currentChapter = 0
-let stars = chapters[currentChapter].querySelectorAll("section div")
-let chapterText = chapters[currentChapter].querySelectorAll("p")
+let chapterIntroduction = chapters[currentChapter].querySelector(
+	"section:first-of-type"
+)
+let stars = chapters[currentChapter].querySelectorAll(
+	"section:nth-of-type(2) div"
+)
+let chapterText = chapters[currentChapter].querySelectorAll(
+	"section:last-of-type p"
+)
 
 const starSelect = (event) => {
 	// Add the "active" class to the clicked star
@@ -132,12 +139,18 @@ const starSelect = (event) => {
 
 	// Check if all stars have the "active" class
 	if (Array.from(stars).every((b) => b.classList.contains("active"))) {
-		chapters[currentChapter]
-			.querySelector("section:first-of-type")
-			.classList.add("hidden")
+		// Iterate over each star and add the "hidden" class
+		stars.forEach((star) => {
+			star.classList.add("hidden")
+		})
+
 		chapters[currentChapter]
 			.querySelector("section:last-of-type")
 			.classList.remove("hidden")
+		// // Iterate over each paragraph in chapterText and remove the "hidden" class
+		// chapterText.forEach((paragraph) => {
+		// 	paragraph.classList.remove("hidden")
+		// })
 	}
 }
 
@@ -155,8 +168,15 @@ const nextChapter = () => {
 	} else {
 		currentChapter++
 
-		stars = chapters[currentChapter].querySelectorAll("section div")
-		chapterText = chapters[currentChapter].querySelectorAll("p")
+		chapterIntroduction = chapters[currentChapter].querySelector(
+			"section:first-of-type"
+		)
+		stars = chapters[currentChapter].querySelectorAll(
+			"section:nth-of-type(2) div"
+		)
+		chapterText = chapters[currentChapter].querySelectorAll(
+			"section:last-of-type p"
+		)
 
 		showChapter()
 
@@ -178,6 +198,18 @@ const showChapter = () => {
 		} else {
 			section.classList.remove("hidden")
 		}
+
+		chapterIntroduction.classList.remove("hidden")
+
+		chapterIntroduction
+			.querySelector("button")
+			.addEventListener("click", () => {
+				chapterIntroduction.classList.add("hidden")
+
+				duration = Math.random() * 10000 + 5000
+				console.log("Chapter timer:", duration)
+				setTimeout(navToReality, duration)
+			})
 		chapterText.forEach((a) => {
 			a.addEventListener("click", nextChapter)
 		})
@@ -206,10 +238,6 @@ const navToReality = () => {
 	startDynamicAnimation(footer, "blink", 10000, 1, 2000)
 }
 
-// console.log("Chapter timer:", duration)
-// setTimeout(navToReality, duration)
-setTimeout(navToReality, 5000)
-
 const ToReality = () => {
 	console.log("To Reality")
 
@@ -233,10 +261,6 @@ const toFantasy = () => {
 	livesSection.classList.add("hidden")
 	realityArticle.classList.add("hidden")
 	fantasyArticle.classList.remove("hidden")
-
-	duration = Math.random() * 10000 + 5000
-	console.log("Chapter timer:", duration)
-	setTimeout(navToReality, duration)
 }
 
 // /////////////

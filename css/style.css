@@ -43,18 +43,31 @@ body {
 	background-color: #130d17;
 }
 
+h2 {
+	margin: 0;
+
+	font-family: var(--heading-font);
+	font-size: calc(2em + 0.5vw);
+	text-align: center;
+	color: #efefef;
+}
+
 p {
 	margin: 0;
 
 	font-family: var(--text-font);
 	font-size: calc(1em + 0.5vw);
 	text-indent: 1em;
-	color: white;
+	color: #efefef;
 }
 
 label,
 textarea {
 	font-family: var(--task-font);
+}
+
+button:hover {
+	cursor: pointer;
 }
 
 /* Classlist related classes */
