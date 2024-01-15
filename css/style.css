@@ -75,7 +75,7 @@ button:hover {
 	display: none !important;
 }
 
-article:first-of-type div.active {
+article:first-of-type > section div.active {
 	background-color: red;
 }
 

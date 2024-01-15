@@ -1,7 +1,9 @@
 // /////////////
 // DATABASE
 // /////////////
-import realityData from "./database.js"
+import chapterCardData from "./card-data.js"
+import chapterTextData from "./chapter-data.js"
+import realityData from "./reality-data.js"
 
 // /////////////
 // LIVES
@@ -123,11 +125,9 @@ window.addEventListener("load", () => {
 // VARIABLES
 const chapters = document.querySelectorAll("article:first-of-type > section")
 let currentChapter = 0
-let chapterIntroduction = chapters[currentChapter].querySelector(
-	"section:first-of-type"
-)
+let chapterIntroduction = document.querySelector("article:first-of-type > div")
 let stars = chapters[currentChapter].querySelectorAll(
-	"section:nth-of-type(2) div"
+	"section:first-of-type div"
 )
 let chapterText = chapters[currentChapter].querySelectorAll(
 	"section:last-of-type p"
@@ -154,10 +154,6 @@ const starSelect = (event) => {
 	}
 }
 
-stars.forEach((a) => {
-	a.addEventListener("click", starSelect)
-})
-
 const nextChapter = () => {
 	if (
 		!chapters[4]
@@ -168,11 +164,9 @@ const nextChapter = () => {
 	} else {
 		currentChapter++
 
-		chapterIntroduction = chapters[currentChapter].querySelector(
-			"section:first-of-type"
-		)
+		chapterIntroduction = document.querySelector("article:first-of-type > div")
 		stars = chapters[currentChapter].querySelectorAll(
-			"section:nth-of-type(2) div"
+			"section:first-of-type div"
 		)
 		chapterText = chapters[currentChapter].querySelectorAll(
 			"section:last-of-type p"
@@ -183,37 +177,56 @@ const nextChapter = () => {
 		stars.forEach((a) => {
 			a.removeEventListener("click", starSelect)
 		})
-		stars.forEach((a) => {
-			a.addEventListener("click", starSelect)
-		})
 
 		console.log(currentChapter)
 	}
 }
 
+const updateData = () => {
+	// Chapter card
+	chapterIntroduction.querySelector(
+		"p:first-of-type"
+	).innerHTML = `Chapter ${chapterCardData[currentChapter].chapterNumber}
+		`
+	chapterIntroduction.querySelector("h2").innerHTML =
+		chapterCardData[currentChapter].chapterTitle
+	chapterIntroduction.querySelector("p:last-of-type").innerHTML =
+		chapterCardData[currentChapter].chapterDescription
+}
+
+const introEvent = () => {
+	chapterIntroduction.classList.add("hidden")
+
+	stars.forEach((a) => {
+		a.addEventListener("click", starSelect)
+	})
+
+	duration = Math.random() * 10000 + 5000
+	console.log("Chapter timer:", duration)
+	setTimeout(navToReality, duration)
+}
+
 const showChapter = () => {
+	// Show current chapter
 	chapters.forEach((section, index) => {
 		if (index !== currentChapter) {
 			section.classList.add("hidden")
 		} else {
 			section.classList.remove("hidden")
 		}
-
-		chapterIntroduction.classList.remove("hidden")
-
-		chapterIntroduction
-			.querySelector("button")
-			.addEventListener("click", () => {
-				chapterIntroduction.classList.add("hidden")
-
-				duration = Math.random() * 10000 + 5000
-				console.log("Chapter timer:", duration)
-				setTimeout(navToReality, duration)
-			})
-		chapterText.forEach((a) => {
-			a.addEventListener("click", nextChapter)
-		})
 	})
+
+	chapterIntroduction.classList.remove("hidden")
+
+	const chapterButton = chapterIntroduction.querySelector("button")
+	chapterButton.removeEventListener("click", introEvent)
+	chapterButton.addEventListener("click", introEvent)
+
+	chapterText.forEach((a) => {
+		a.addEventListener("click", nextChapter)
+	})
+
+	updateData()
 }
 
 showChapter()
@@ -234,7 +247,7 @@ const navToReality = () => {
 
 	footer.classList.remove("hidden")
 
-	startDynamicAnimation(fantasyArticle, "shake", 500, 4, 0)
+	startDynamicAnimation(fantasyArticle, "shake", 250, 4, 0)
 	startDynamicAnimation(footer, "blink", 10000, 1, 2000)
 }
 
