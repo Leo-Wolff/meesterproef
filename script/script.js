@@ -300,6 +300,7 @@ const navToReality = () => {
 
 	footer.classList.remove("hidden")
 
+	stopAnimation = false
 	startDynamicAnimation(fantasyArticle, "shake", 250, 4, 0)
 	startDynamicAnimation(footer, "blink", 10000, 1, 2000)
 }
@@ -307,19 +308,20 @@ const navToReality = () => {
 const ToReality = () => {
 	console.log("To Reality")
 
+	stopDynamicAnimation(fantasyArticle, "shake")
+	stopDynamicAnimation(footer, "blink")
+
 	livesSection.classList.remove("hidden")
 	realityArticle.classList.remove("hidden")
 	footer.classList.add("hidden")
 	fantasyArticle.classList.add("hidden")
 
-	setTimeout(toFantasy, 3000)
+	setTimeout(toFantasy, 30000)
 }
 
 footer.addEventListener("click", () => {
 	ToReality()
 })
-
-ToReality()
 
 const toFantasy = () => {
 	checkLives()
@@ -329,43 +331,56 @@ const toFantasy = () => {
 	livesSection.classList.add("hidden")
 	realityArticle.classList.add("hidden")
 	fantasyArticle.classList.remove("hidden")
+
+	duration = Math.random() * 10000 + 5000
+	console.log("Chapter timer:", duration)
+	setTimeout(navToReality, duration)
 }
 
 // /////////////
 // ANIMATION
 // /////////////
 
-// const startDynamicAnimation = (
-// 	element,
-// 	animationName,
-// 	animationDuration,
-// 	iterations,
-// 	animationDelay
-// ) => {
-// 	let totalDelay = 0 + animationDelay
-// 	let totalDuration = animationDuration * iterations
-// 	element.style.animationDuration = `${animationDuration}ms`
+let stopAnimation = false
 
-// 	if (chapterIntroduction.classList.contains("hidden")) {
-// 		const animate = () => {
-// 			setTimeout(() => {
-// 				element.classList.add(animationName)
+const startDynamicAnimation = (
+	element,
+	animationName,
+	animationDuration,
+	iterations,
+	animationDelay
+) => {
+	let totalDelay = 0 + animationDelay
+	let totalDuration = animationDuration * iterations
+	element.style.animationDuration = `${animationDuration}ms`
 
-// 				setTimeout(() => {
-// 					element.classList.remove(animationName)
-// 					animate()
-// 				}, totalDuration)
-// 			}, totalDelay)
+	if (chapterIntroduction.classList.contains("hidden")) {
+		const animate = () => {
+			setTimeout(() => {
+				element.classList.add(animationName)
 
-// 			if (totalDelay == 0 + animationDelay) {
-// 				totalDelay = 16000
-// 			}
-// 			totalDelay = Math.max(totalDelay / 2, 0.1)
-// 		}
+				setTimeout(() => {
+					element.classList.remove(animationName)
+					if (stopAnimation == false) {
+						animate()
+					}
+				}, totalDuration)
+			}, totalDelay)
 
-// 		// Start the animation initially
-// 		animate()
-// 	} else if (!chapterIntroduction.classList.contains("hidden")) {
-// 		return
-// 	}
-// }
+			if (totalDelay == 0 + animationDelay) {
+				totalDelay = 16000
+			}
+			totalDelay = Math.max(totalDelay / 2, 0.1)
+		}
+
+		// Start the animation initially
+		animate()
+	} else if (!chapterIntroduction.classList.contains("hidden")) {
+		return
+	}
+}
+
+const stopDynamicAnimation = (element, animationName) => {
+	element.classList.remove(animationName)
+	stopAnimation = true
+}
