@@ -1,15 +1,6 @@
-article:last-of-type > section {
-	position: absolute;
-	top: 1em;
-	left: 50%;
-	transform: translateX(-50%);
-
-	width: 50vw;
-	height: 95vh;
-
-	background: url("../img/paper.svg") no-repeat center center;
-	background-size: contain;
-}
+/* *************
+DESK
+************* */
 
 article:last-of-type > div {
 	position: absolute;
@@ -18,27 +9,18 @@ article:last-of-type > div {
 	height: 100vh;
 }
 
+/* Countdown timer */
 article:last-of-type > div > div {
 	position: relative;
 	top: 2em;
 	left: 2em;
+	transform: rotate(5deg);
 
 	width: 20vw;
 	height: 50vh;
 
-	transform: rotate(5deg);
-
 	background: url("../img/phone.svg") no-repeat center center;
 	background-size: contain;
-}
-
-article:last-of-type > div > img:first-of-type {
-	position: absolute;
-	bottom: 5em;
-	left: calc(50% + 50vw / 2 - 2em);
-	transform: translateX(-50%);
-
-	height: 45vh;
 }
 
 article:last-of-type > div > div p {
@@ -50,7 +32,34 @@ article:last-of-type > div > div p {
 	font-size: calc(1em + 1.5vw);
 	text-align: center;
 	text-indent: 0;
-	color: red;
+	color: var(--red);
+}
+
+/* pen */
+article:last-of-type > div > img:first-of-type {
+	position: absolute;
+	bottom: 5em;
+	left: calc(50% + 50vw / 2 - 2em);
+	transform: translateX(-50%);
+
+	height: 45vh;
+}
+
+/* *************
+TASKS
+************* */
+
+article:last-of-type > section {
+	position: absolute;
+	top: 1em;
+	left: 50%;
+	transform: translateX(-50%);
+
+	width: 50vw;
+	height: 95vh;
+
+	background: url("../img/paper.svg") no-repeat center center;
+	background-size: contain;
 }
 
 article:last-of-type > section > form {
@@ -86,9 +95,8 @@ article:last-of-type > section > form label > img {
 
 article:last-of-type > img:first-of-type {
 	position: absolute;
-	z-index: 10;
-
-	animation: fade-in 1s alternate 2 backwards;
 
 	opacity: 0;
+	z-index: 10;
+	animation: fade-in 1s alternate 2 backwards;
 }
