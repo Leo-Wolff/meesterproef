@@ -158,12 +158,20 @@ const nextChapter = () => {
 	} else {
 		currentChapter++
 
+		pagesIndex = 0
 		chapterIntroduction = document.querySelector("article:first-of-type > div")
 		stars = chapters[currentChapter].querySelectorAll(
 			"section:first-of-type div"
 		)
 		chapterBook = chapters[currentChapter].querySelector("section:last-of-type")
 		pages = chapterBook.querySelectorAll("img:not(section > button > img)")
+		navButtons = chapterBook.querySelectorAll("button")
+
+		navButtons[0].removeEventListener("click", previousNav)
+		navButtons[1].removeEventListener("click", nextNav)
+
+		navButtons[0].addEventListener("click", previousNav)
+		navButtons[1].addEventListener("click", nextNav)
 
 		showChapter()
 
@@ -210,19 +218,22 @@ const pageNavigation = () => {
 
 	if (pagesIndex > 0) {
 		navButtons[0].classList.remove("hidden")
+		navButtons[2].classList.add("hidden")
 	} else {
 		navButtons[0].classList.add("hidden")
+		navButtons[2].classList.add("hidden")
 	}
 
 	if (pagesIndex < pages.length - 1) {
 		navButtons[1].classList.remove("hidden")
+		navButtons[2].classList.add("hidden")
 	} else {
 		navButtons[1].classList.add("hidden")
 		navButtons[2].classList.remove("hidden")
 	}
 }
 
-navButtons[0].addEventListener("click", () => {
+const previousNav = () => {
 	if (pagesIndex > 0) {
 		pagesIndex--
 
@@ -231,9 +242,11 @@ navButtons[0].addEventListener("click", () => {
 		navButtons[0].classList.add("hidden")
 		navButtons[1].classList.remove("hidden")
 	}
-})
+}
 
-navButtons[1].addEventListener("click", () => {
+navButtons[0].addEventListener("click", previousNav)
+
+const nextNav = () => {
 	if (pagesIndex < pages.length - 1) {
 		pagesIndex++
 
@@ -242,7 +255,9 @@ navButtons[1].addEventListener("click", () => {
 		navButtons[1].classList.add("hidden")
 		navButtons[0].classList.remove("hidden")
 	}
-})
+}
+
+navButtons[1].addEventListener("click", nextNav)
 
 pageNavigation()
 
@@ -318,37 +333,37 @@ const toFantasy = () => {
 // ANIMATION
 // /////////////
 
-const startDynamicAnimation = (
-	element,
-	animationName,
-	animationDuration,
-	iterations,
-	animationDelay
-) => {
-	let totalDelay = 0 + animationDelay
-	let totalDuration = animationDuration * iterations
-	element.style.animationDuration = `${animationDuration}ms`
+// const startDynamicAnimation = (
+// 	element,
+// 	animationName,
+// 	animationDuration,
+// 	iterations,
+// 	animationDelay
+// ) => {
+// 	let totalDelay = 0 + animationDelay
+// 	let totalDuration = animationDuration * iterations
+// 	element.style.animationDuration = `${animationDuration}ms`
 
-	if (chapterIntroduction.classList.contains("hidden")) {
-		const animate = () => {
-			setTimeout(() => {
-				element.classList.add(animationName)
+// 	if (chapterIntroduction.classList.contains("hidden")) {
+// 		const animate = () => {
+// 			setTimeout(() => {
+// 				element.classList.add(animationName)
 
-				setTimeout(() => {
-					element.classList.remove(animationName)
-					animate()
-				}, totalDuration)
-			}, totalDelay)
+// 				setTimeout(() => {
+// 					element.classList.remove(animationName)
+// 					animate()
+// 				}, totalDuration)
+// 			}, totalDelay)
 
-			if (totalDelay == 0 + animationDelay) {
-				totalDelay = 16000
-			}
-			totalDelay = Math.max(totalDelay / 2, 0.1)
-		}
+// 			if (totalDelay == 0 + animationDelay) {
+// 				totalDelay = 16000
+// 			}
+// 			totalDelay = Math.max(totalDelay / 2, 0.1)
+// 		}
 
-		// Start the animation initially
-		animate()
-	} else if (!chapterIntroduction.classList.contains("hidden")) {
-		return
-	}
-}
+// 		// Start the animation initially
+// 		animate()
+// 	} else if (!chapterIntroduction.classList.contains("hidden")) {
+// 		return
+// 	}
+// }

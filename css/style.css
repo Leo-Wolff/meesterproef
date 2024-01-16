@@ -76,7 +76,29 @@ button:hover {
 }
 
 article:first-of-type > section div.active {
-	background-color: red;
+	box-shadow: 0 0 2em 0.5em #e9cc7d;
+
+	background-color: #e9cc7d;
+
+	animation: selected 0.75s ease-in-out;
+}
+
+@keyframes selected {
+	0% {
+		width: 1em;
+		height: 1em;
+		transform-origin: center;
+	}
+	50% {
+		width: 1.5em;
+		height: 1.5em;
+		transform-origin: center;
+	}
+	100% {
+		width: 1em;
+		height: 1em;
+		transform-origin: center;
+	}
 }
 
 /* *************
