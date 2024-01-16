@@ -317,8 +317,10 @@ const startCountdown = () => {
 		countdownSeconds--
 
 		if (countdownSeconds <= 0) {
-			clearInterval(countdownInterval)
-			toFantasy() // When the countdown reaches zero, transition to the fantasy
+			setTimeout(() => {
+				clearInterval(countdownInterval)
+				toFantasy() // When the countdown reaches zero, transition to the fantasy
+			}, 1000)
 		}
 
 		updateCountdownTimer()
@@ -343,6 +345,8 @@ const ToReality = () => {
 	stopAnimation = true
 	stopDynamicAnimation(fantasyArticle, "shake")
 	stopDynamicAnimation(footer, "blink")
+
+	startAnimation()
 
 	livesSection.classList.remove("hidden")
 	realityArticle.classList.remove("hidden")
@@ -375,6 +379,9 @@ const toFantasy = () => {
 // /////////////
 
 let stopAnimation = false
+const fantasyMirage = document.querySelector(
+	"article:last-of-type > img:first-of-type"
+)
 
 const startDynamicAnimation = (
 	element,
@@ -411,6 +418,24 @@ const startDynamicAnimation = (
 	} else if (!chapterIntroduction.classList.contains("hidden")) {
 		return
 	}
+}
+
+const startAnimation = () => {
+	let delay = 12000
+	const mirage = () => {
+		setTimeout(() => {
+			fantasyMirage.classList.remove("hidden")
+
+			setTimeout(() => {
+				fantasyMirage.classList.add("hidden")
+
+				mirage()
+			}, 2000)
+		}, delay)
+
+		delay = Math.max(delay / 2, 0.1)
+	}
+	mirage()
 }
 
 const stopDynamicAnimation = (element, animationName) => {

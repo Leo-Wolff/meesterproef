@@ -74,3 +74,12 @@ article:last-of-type > section > form textarea {
 article:last-of-type > section > form label > img {
 	width: 0.5em;
 }
+
+article:last-of-type > img:first-of-type {
+	position: absolute;
+	z-index: 10;
+
+	animation: fade-in 1s alternate 2 backwards;
+
+	opacity: 0;
+}

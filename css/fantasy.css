@@ -156,6 +156,8 @@ article:first-of-type > section > section:last-of-type > section > button {
 
 	opacity: 0;
 	transition: 0.5s;
+
+	animation: fade-in 0.5s ease-in-out reverse;
 }
 
 article:first-of-type
@@ -193,6 +195,7 @@ article:first-of-type
 	color: #130d17;
 
 	opacity: 1;
+	animation: none;
 }
 
 /* *************
