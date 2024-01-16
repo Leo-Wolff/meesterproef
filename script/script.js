@@ -26,17 +26,58 @@ const checkLives = () => {
 }
 
 // /////////////
-// REALITY - LEVELS
+// REALITY - COUNTDOWN
+// /////////////
+
+// VARIABLES
+const countdownTimer = document.querySelector(
+	"article:last-of-type > div > div > p"
+)
+
+let duration = Math.random() * 10000 + 5000
+let countdownDuration = 30
+
+// Function to update the countdown timer
+const updateCountdownTimer = () => {
+	const seconds = countdownDuration % 60
+	const formattedTime = `00:${seconds.toString().padStart(2, "0")}`
+	countdownTimer.textContent = formattedTime
+}
+
+// Function to start the countdown
+const startCountdown = () => {
+	const countdownInterval = setInterval(() => {
+		countdownDuration--
+
+		if (countdownDuration <= 0) {
+			setTimeout(() => {
+				clearInterval(countdownInterval)
+				toFantasy() // When the countdown reaches zero, transition to the fantasy
+			}, 1000)
+		}
+
+		updateCountdownTimer()
+	}, 1000)
+}
+
+const resetCountdown = () => {
+	countdownDuration = 30
+}
+
+// /////////////
+// REALITY - TASKS
 // /////////////
 
 // VARIABLES
 const tasks = document.querySelectorAll("article:last-of-type > section")
 let footer = document.querySelector("footer")
 let footerText = footer.querySelector("p")
-let currentTask = 0
-let currentCharacter = 0
+
 let textArea = tasks[currentTask].querySelector("textarea")
 let taskText = realityData[currentTask].taskText
+
+let currentTask = 0
+let currentCharacter = 0
 
 // TASK BEHAVIOUR
 const typeText = (event) => {
@@ -64,15 +105,15 @@ const typeText = (event) => {
 textArea.addEventListener("keydown", typeText)
 
 // LEVEL VISIBILITY
-const generateRandomLevel = () => {
-	let randomLevel = Math.floor(Math.random() * tasks.length)
+const generateRandomTask = () => {
+	let randomTask = Math.floor(Math.random() * tasks.length)
 
-	if (randomLevel == currentTask) {
-		return generateRandomLevel() // Try again
+	if (randomTask == currentTask) {
+		return generateRandomTask() // Try again
 	} else {
-		currentTask = randomLevel
+		currentTask = randomTask
 
-		// Update
+		// Update variables
 		textArea = tasks[currentTask].querySelector("textarea")
 		taskText = realityData[currentTask].taskText
 		textArea.removeEventListener("keydown", typeText)
@@ -82,9 +123,9 @@ const generateRandomLevel = () => {
 	}
 }
 
-generateRandomLevel()
+generateRandomTask()
 
-const showLevel = () => {
+const showTask = () => {
 	tasks.forEach((section, index) => {
 		if (index !== currentTask) {
 			section.classList.add("hidden")
@@ -96,43 +137,77 @@ const showLevel = () => {
 	footerText.innerHTML = realityData[currentTask].taskDescription
 }
 
-showLevel()
+showTask()
 
-// Reset function for the taskText
+// /////////////
+// REALITY - RESETS
+// /////////////
+
 const resetText = () => {
 	textArea.value = ""
 	currentCharacter = 0
 }
 
-const resetLevel = () => {
+const resetTask = () => {
 	resetText()
-	generateRandomLevel()
-	showLevel()
+	generateRandomTask()
+	showTask()
 }
 
-// Reset the level when the page is loaded
 window.addEventListener("load", () => {
 	resetText()
-	generateRandomLevel()
-	showLevel()
+	generateRandomTask()
+	showTask()
 })
 
 // /////////////
-// FANTASY - LEVELS
+// FANTASY - CHAPTER CARD
 // /////////////
 
 // VARIABLES
 const chapters = document.querySelectorAll("article:first-of-type > section")
-let fantasyTimer = false
-let currentChapter = 0
 let chapterIntroduction = document.querySelector("article:first-of-type > div")
 let stars = chapters[currentChapter].querySelectorAll(
 	"section:first-of-type div"
 )
+
 let chapterBook = chapters[currentChapter].querySelector("section:last-of-type")
 let pages = chapterBook.querySelectorAll("img:not(section > button > img)")
 let navButtons = chapterBook.querySelectorAll("button")
+
+let fantasyTimer = false
+let currentChapter = 0
 let pagesIndex = 0
+
+const updateIntro = () => {
+	chapterIntroduction.querySelector(
+		"p:first-of-type"
+	).innerHTML = `Chapter ${fantasyData[currentChapter].chapterNumber}`
+	chapterIntroduction.querySelector("h2").innerHTML =
+		fantasyData[currentChapter].chapterTitle
+	chapterIntroduction.querySelector("p:last-of-type").innerHTML =
+		fantasyData[currentChapter].chapterDescription
+}
+
+const introEvent = () => {
+	chapterIntroduction.classList.add("hidden")
+
+	stars.forEach((a) => {
+		a.addEventListener("click", starSelect)
+	})
+
+	if (fantasyTimer == false) {
+		duration = Math.random() * 10000 + 5000
+		console.log("Chapter timer:", duration)
+		setTimeout(navToReality, duration)
+
+		fantasyTimer = true
+	}
+}
+
+// /////////////
+// FANTASY - CHAPTERS
+// /////////////
 
 const starSelect = (event) => {
 	// Add the "active" class to the clicked star
@@ -186,31 +261,32 @@ const nextChapter = () => {
 	}
 }
 
-const updateIntro = () => {
-	chapterIntroduction.querySelector(
-		"p:first-of-type"
-	).innerHTML = `Chapter ${fantasyData[currentChapter].chapterNumber}`
-	chapterIntroduction.querySelector("h2").innerHTML =
-		fantasyData[currentChapter].chapterTitle
-	chapterIntroduction.querySelector("p:last-of-type").innerHTML =
-		fantasyData[currentChapter].chapterDescription
-}
-
-const introEvent = () => {
-	chapterIntroduction.classList.add("hidden")
-
-	stars.forEach((a) => {
-		a.addEventListener("click", starSelect)
+const showChapter = () => {
+	// Show current chapter
+	chapters.forEach((section, index) => {
+		if (index !== currentChapter) {
+			section.classList.add("hidden")
+		} else {
+			section.classList.remove("hidden")
+		}
 	})
 
-	if (fantasyTimer == false) {
-		duration = Math.random() * 10000 + 5000
-		console.log("Chapter timer:", duration)
-		setTimeout(navToReality, duration)
+	chapterIntroduction.classList.remove("hidden")
 
-		fantasyTimer = true
-	}
+	const chapterButton = chapterIntroduction.querySelector("button")
+	chapterButton.removeEventListener("click", introEvent)
+	chapterButton.addEventListener("click", introEvent)
+
+	navButtons[2].addEventListener("click", nextChapter)
+
+	updateIntro()
 }
+
+showChapter()
+
+// /////////////
+// FANTASY - BOOKS
+// /////////////
 
 const pageNavigation = () => {
 	pages.forEach((a, index) => {
@@ -266,29 +342,6 @@ navButtons[1].addEventListener("click", nextNav)
 
 pageNavigation()
 
-const showChapter = () => {
-	// Show current chapter
-	chapters.forEach((section, index) => {
-		if (index !== currentChapter) {
-			section.classList.add("hidden")
-		} else {
-			section.classList.remove("hidden")
-		}
-	})
-
-	chapterIntroduction.classList.remove("hidden")
-
-	const chapterButton = chapterIntroduction.querySelector("button")
-	chapterButton.removeEventListener("click", introEvent)
-	chapterButton.addEventListener("click", introEvent)
-
-	navButtons[2].addEventListener("click", nextChapter)
-
-	updateIntro()
-}
-
-showChapter()
-
 // /////////////
 // TRANSITIONS
 // /////////////
@@ -296,43 +349,9 @@ showChapter()
 // VARIABLES
 let fantasyArticle = document.querySelector("article:first-of-type")
 let realityArticle = document.querySelector("article:last-of-type")
-let duration = Math.random() * 10000 + 5000
-
-// VARIABLES
-const countdownTimer = document.querySelector(
-	"article:last-of-type > div > div > p"
-)
-let countdownSeconds = 30 // Initial countdown time in seconds
-
-// Function to update the countdown timer
-const updateCountdownTimer = () => {
-	const seconds = countdownSeconds % 60
-	const formattedTime = `00:${seconds.toString().padStart(2, "0")}`
-	countdownTimer.textContent = formattedTime
-}
-
-// Function to start the countdown
-const startCountdown = () => {
-	const countdownInterval = setInterval(() => {
-		countdownSeconds--
-
-		if (countdownSeconds <= 0) {
-			setTimeout(() => {
-				clearInterval(countdownInterval)
-				toFantasy() // When the countdown reaches zero, transition to the fantasy
-			}, 1000)
-		}
-
-		updateCountdownTimer()
-	}, 1000)
-}
-
-const resetCountdown = () => {
-	countdownSeconds = 30
-}
 
 const navToReality = () => {
-	resetLevel()
+	resetTask()
 
 	console.log("Navigation revealed")
 
@@ -383,9 +402,10 @@ const toFantasy = () => {
 }
 
 // /////////////
-// ANIMATION
+// ANIMATIONS
 // /////////////
 
+// VARIABLES
 let stopAnimation = false
 let stopRealityAnimation = false
 const fantasyMirage = document.querySelector(
@@ -456,7 +476,8 @@ const stopDynamicAnimation = (element, animationName) => {
 	console.log(stopAnimation)
 }
 
-livesSection.classList.remove("hidden")
-realityArticle.classList.remove("hidden")
-footer.classList.add("hidden")
-fantasyArticle.classList.add("hidden")
+// Comment to show reality upon load
+// livesSection.classList.remove("hidden")
+// realityArticle.classList.remove("hidden")
+// footer.classList.add("hidden")
+// fantasyArticle.classList.add("hidden")
