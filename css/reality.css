@@ -32,6 +32,15 @@ article:last-of-type > div > div {
 	background-size: contain;
 }
 
+article:last-of-type > div > img:first-of-type {
+	position: absolute;
+	bottom: 5em;
+	left: calc(50% + 50vw / 2 - 2em);
+	transform: translateX(-50%);
+
+	height: 45vh;
+}
+
 article:last-of-type > div > div p {
 	position: relative;
 	top: 2em;
