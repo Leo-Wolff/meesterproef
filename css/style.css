@@ -111,6 +111,7 @@ article:first-of-type {
 	background-size: cover; */
 
 	background: url("../img/fantasy-bg.jpg");
+	background-size: cover;
 }
 
 article:last-of-type {
@@ -119,6 +120,7 @@ article:last-of-type {
 	height: calc(2352px / 2);
 
 	background: url("../img/reality-bg.jpg");
+	background-size: contain;
 }
 
 footer {
@@ -168,6 +170,7 @@ footer nav p {
 	font-size: 1.25em;
 	font-weight: bold;
 	color: #e9cc7d;
+	text-align: center;
 }
 
 /* *************

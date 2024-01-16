@@ -123,6 +123,7 @@ window.addEventListener("load", () => {
 
 // VARIABLES
 const chapters = document.querySelectorAll("article:first-of-type > section")
+let fantasyTimer = false
 let currentChapter = 0
 let chapterIntroduction = document.querySelector("article:first-of-type > div")
 let stars = chapters[currentChapter].querySelectorAll(
@@ -202,9 +203,13 @@ const introEvent = () => {
 		a.addEventListener("click", starSelect)
 	})
 
-	duration = Math.random() * 10000 + 5000
-	console.log("Chapter timer:", duration)
-	setTimeout(navToReality, duration)
+	if (fantasyTimer == false) {
+		duration = Math.random() * 10000 + 5000
+		console.log("Chapter timer:", duration)
+		setTimeout(navToReality, duration)
+
+		fantasyTimer = true
+	}
 }
 
 const pageNavigation = () => {
@@ -298,9 +303,9 @@ const navToReality = () => {
 
 	console.log("Navigation revealed")
 
+	stopAnimation = false
 	footer.classList.remove("hidden")
 
-	stopAnimation = false
 	startDynamicAnimation(fantasyArticle, "shake", 250, 4, 0)
 	startDynamicAnimation(footer, "blink", 10000, 1, 2000)
 }
@@ -308,6 +313,7 @@ const navToReality = () => {
 const ToReality = () => {
 	console.log("To Reality")
 
+	stopAnimation = true
 	stopDynamicAnimation(fantasyArticle, "shake")
 	stopDynamicAnimation(footer, "blink")
 
@@ -332,7 +338,7 @@ const toFantasy = () => {
 	realityArticle.classList.add("hidden")
 	fantasyArticle.classList.remove("hidden")
 
-	duration = Math.random() * 10000 + 5000
+	duration = Math.random() * 10000 + 10000
 	console.log("Chapter timer:", duration)
 	setTimeout(navToReality, duration)
 }
@@ -356,6 +362,8 @@ const startDynamicAnimation = (
 
 	if (chapterIntroduction.classList.contains("hidden")) {
 		const animate = () => {
+			console.log(stopAnimation)
+
 			setTimeout(() => {
 				element.classList.add(animationName)
 
@@ -382,5 +390,5 @@ const startDynamicAnimation = (
 
 const stopDynamicAnimation = (element, animationName) => {
 	element.classList.remove(animationName)
-	stopAnimation = true
+	console.log(stopAnimation)
 }
