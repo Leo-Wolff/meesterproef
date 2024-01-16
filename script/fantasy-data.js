@@ -3,7 +3,7 @@ const fantasyData = {
 		chapterNumber: 1,
 		chapterTitle: "A New World",
 		chapterDescription:
-			"Out of seemingly nowhere, Adrien teleports into a completely different world.",
+			"out of seemingly nowhere, Adrien teleports into a completely different world.",
 	},
 	1: {
 		chapterNumber: 2,
@@ -14,7 +14,7 @@ const fantasyData = {
 	2: {
 		chapterNumber: 3,
 		chapterTitle: "Awake",
-		chapterDescription: "Finally, Adrien awakes from his fantasy.",
+		chapterDescription: "finally, Adrien awakes from his fantasy.",
 	},
 	3: {
 		chapterNumber: 4,

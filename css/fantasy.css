@@ -113,10 +113,21 @@ article:first-of-type > div button {
 	text-transform: uppercase;
 	color: #efefef;
 	background: none;
+
+	animation: border-hint 2s ease-in-out 5s alternate infinite;
 }
 
 article:first-of-type > div button:hover {
 	border: 2px solid #efefef;
+}
+
+@keyframes border-hint {
+	0% {
+		border: 2px solid #efefef00;
+	}
+	100% {
+		border: 2px solid #efefef;
+	}
 }
 
 article:first-of-type > section > section:last-of-type > img {
