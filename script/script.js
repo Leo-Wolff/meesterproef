@@ -298,6 +298,33 @@ let fantasyArticle = document.querySelector("article:first-of-type")
 let realityArticle = document.querySelector("article:last-of-type")
 let duration = Math.random() * 10000 + 5000
 
+// VARIABLES
+const countdownTimer = document.querySelector(
+	"article:last-of-type > div > div > p"
+)
+let countdownSeconds = 30 // Initial countdown time in seconds
+
+// Function to update the countdown timer
+const updateCountdownTimer = () => {
+	const seconds = countdownSeconds % 60
+	const formattedTime = `00:${seconds.toString().padStart(2, "0")}`
+	countdownTimer.textContent = formattedTime
+}
+
+// Function to start the countdown
+const startCountdown = () => {
+	const countdownInterval = setInterval(() => {
+		countdownSeconds--
+
+		if (countdownSeconds <= 0) {
+			clearInterval(countdownInterval)
+			toFantasy() // When the countdown reaches zero, transition to the fantasy
+		}
+
+		updateCountdownTimer()
+	}, 1000)
+}
+
 const navToReality = () => {
 	resetLevel()
 
@@ -322,7 +349,7 @@ const ToReality = () => {
 	footer.classList.add("hidden")
 	fantasyArticle.classList.add("hidden")
 
-	setTimeout(toFantasy, 30000)
+	startCountdown()
 }
 
 footer.addEventListener("click", () => {
@@ -391,7 +418,7 @@ const stopDynamicAnimation = (element, animationName) => {
 	console.log(stopAnimation)
 }
 
-livesSection.classList.remove("hidden")
-realityArticle.classList.remove("hidden")
-footer.classList.add("hidden")
-fantasyArticle.classList.add("hidden")
+// livesSection.classList.remove("hidden")
+// realityArticle.classList.remove("hidden")
+// footer.classList.add("hidden")
+// fantasyArticle.classList.add("hidden")
