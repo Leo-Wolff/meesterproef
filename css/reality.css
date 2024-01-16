@@ -1,13 +1,14 @@
 article:last-of-type > section {
 	position: absolute;
+	top: 1em;
 	left: 50%;
-	bottom: 4em;
 	transform: translateX(-50%);
 
 	width: 50vw;
-	height: 800px;
+	height: 95vh;
 
 	background: url("../img/paper.svg") no-repeat center center;
+	background-size: contain;
 }
 
 article:last-of-type > section > form {

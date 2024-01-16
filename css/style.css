@@ -118,8 +118,7 @@ article:last-of-type {
 
 	height: calc(2352px / 2);
 
-	background: url("../img/reality-bg.jpg") no-repeat center top;
-	background-size: cover;
+	background: url("../img/reality-bg.jpg");
 }
 
 footer {

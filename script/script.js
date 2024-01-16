@@ -319,6 +319,8 @@ footer.addEventListener("click", () => {
 	ToReality()
 })
 
+ToReality()
+
 const toFantasy = () => {
 	checkLives()
 
