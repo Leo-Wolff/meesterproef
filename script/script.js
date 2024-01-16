@@ -362,8 +362,6 @@ const startDynamicAnimation = (
 
 	if (chapterIntroduction.classList.contains("hidden")) {
 		const animate = () => {
-			console.log(stopAnimation)
-
 			setTimeout(() => {
 				element.classList.add(animationName)
 
@@ -392,3 +390,8 @@ const stopDynamicAnimation = (element, animationName) => {
 	element.classList.remove(animationName)
 	console.log(stopAnimation)
 }
+
+livesSection.classList.remove("hidden")
+realityArticle.classList.remove("hidden")
+footer.classList.add("hidden")
+fantasyArticle.classList.add("hidden")

@@ -22,10 +22,18 @@ ROOT + FONTS
 	font-style: normal;
 }
 
+@font-face {
+	font-family: "Orbitron";
+	src: url("../font/Orbitron/Orbitron-VariableFont_wght.ttf"), format("ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+
 :root {
 	--heading-font: "Lobster", Optima, source-sans-pro, sans-serif;
 	--text-font: "Montserrat", Optima, source-sans-pro, sans-serif;
 	--task-font: "Handlee", Optima, source-sans-pro, sans-serif;
+	--countdown-font: "Orbitron", Optima, source-sans-pro, serif;
 }
 
 /* *************
@@ -106,9 +114,6 @@ LAY-OUT
 ************* */
 article:first-of-type {
 	height: calc(2352px / 2);
-
-	/* background: url("../img/fantasy-bg.jpg") no-repeat center top;
-	background-size: cover; */
 
 	background: url("../img/fantasy-bg.jpg");
 	background-size: cover;

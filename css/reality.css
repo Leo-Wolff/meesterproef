@@ -11,6 +11,39 @@ article:last-of-type > section {
 	background-size: contain;
 }
 
+article:last-of-type > div {
+	position: absolute;
+
+	width: 100vw;
+	height: 100vh;
+}
+
+article:last-of-type > div > div {
+	position: relative;
+	top: 2em;
+	left: 2em;
+
+	width: 20vw;
+	height: 50vh;
+
+	/* transform: rotate(5deg); */
+
+	background: url("../img/phone.svg") no-repeat center center;
+	background-size: contain;
+}
+
+article:last-of-type > div > div p {
+	position: relative;
+	top: 2em;
+
+	font-family: var(--countdown-font);
+	font-weight: 900;
+	font-size: calc(1em + 1.5vw);
+	text-align: center;
+	text-indent: 0;
+	color: red;
+}
+
 article:last-of-type > section > form {
 	position: relative;
 	top: 2em;
