@@ -327,6 +327,10 @@ const startCountdown = () => {
 	}, 1000)
 }
 
+const resetCountdown = () => {
+	countdownSeconds = 30
+}
+
 const navToReality = () => {
 	resetLevel()
 
@@ -343,6 +347,7 @@ const ToReality = () => {
 	console.log("To Reality")
 
 	stopAnimation = true
+	stopRealityAnimation = false
 	stopDynamicAnimation(fantasyArticle, "shake")
 	stopDynamicAnimation(footer, "blink")
 
@@ -365,6 +370,9 @@ const toFantasy = () => {
 
 	console.log("To Fantasy")
 
+	stopRealityAnimation = true
+	resetCountdown()
+
 	livesSection.classList.add("hidden")
 	realityArticle.classList.add("hidden")
 	fantasyArticle.classList.remove("hidden")
@@ -379,6 +387,7 @@ const toFantasy = () => {
 // /////////////
 
 let stopAnimation = false
+let stopRealityAnimation = false
 const fantasyMirage = document.querySelector(
 	"article:last-of-type > img:first-of-type"
 )
@@ -429,7 +438,11 @@ const startAnimation = () => {
 			setTimeout(() => {
 				fantasyMirage.classList.add("hidden")
 
-				mirage()
+				if (stopRealityAnimation == false) {
+					mirage()
+				} else {
+					fantasyMirage.classList.add("hidden")
+				}
 			}, 2000)
 		}, delay)
 
@@ -442,8 +455,3 @@ const stopDynamicAnimation = (element, animationName) => {
 	element.classList.remove(animationName)
 	console.log(stopAnimation)
 }
-
-// livesSection.classList.remove("hidden")
-// realityArticle.classList.remove("hidden")
-// footer.classList.add("hidden")
-// fantasyArticle.classList.add("hidden")
