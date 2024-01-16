@@ -25,6 +25,10 @@ const checkLives = () => {
 	}
 }
 
+if (currentLife == 2) {
+	alert("Ahhhhhh! Stress")
+}
+
 // /////////////
 // REALITY - COUNTDOWN
 // /////////////
@@ -69,15 +73,15 @@ const resetCountdown = () => {
 // /////////////
 
 // VARIABLES
+let currentTask = 0
+let currentCharacter = 0
+
 const tasks = document.querySelectorAll("article:last-of-type > section")
 let footer = document.querySelector("footer")
 let footerText = footer.querySelector("p")
 
 let textArea = tasks[currentTask].querySelector("textarea")
 let taskText = realityData[currentTask].taskText
-
-let currentTask = 0
-let currentCharacter = 0
 
 // TASK BEHAVIOUR
 const typeText = (event) => {
@@ -165,8 +169,12 @@ window.addEventListener("load", () => {
 // /////////////
 
 // VARIABLES
+let fantasyTimer = false
+let currentChapter = 0
+let pagesIndex = 0
+
 const chapters = document.querySelectorAll("article:first-of-type > section")
-let chapterIntroduction = document.querySelector("article:first-of-type > div")
+let chapterCard = document.querySelector("article:first-of-type > div")
 let stars = chapters[currentChapter].querySelectorAll(
 	"section:first-of-type div"
 )
@@ -175,22 +183,18 @@ let chapterBook = chapters[currentChapter].querySelector("section:last-of-type")
 let pages = chapterBook.querySelectorAll("img:not(section > button > img)")
 let navButtons = chapterBook.querySelectorAll("button")
 
-let fantasyTimer = false
-let currentChapter = 0
-let pagesIndex = 0
-
 const updateIntro = () => {
-	chapterIntroduction.querySelector(
+	chapterCard.querySelector(
 		"p:first-of-type"
 	).innerHTML = `Chapter ${fantasyData[currentChapter].chapterNumber}`
-	chapterIntroduction.querySelector("h2").innerHTML =
+	chapterCard.querySelector("h2").innerHTML =
 		fantasyData[currentChapter].chapterTitle
-	chapterIntroduction.querySelector("p:last-of-type").innerHTML =
+	chapterCard.querySelector("p:last-of-type").innerHTML =
 		fantasyData[currentChapter].chapterDescription
 }
 
 const introEvent = () => {
-	chapterIntroduction.classList.add("hidden")
+	chapterCard.classList.add("hidden")
 
 	stars.forEach((a) => {
 		a.addEventListener("click", starSelect)
@@ -235,7 +239,7 @@ const nextChapter = () => {
 		currentChapter++
 
 		pagesIndex = 0
-		chapterIntroduction = document.querySelector("article:first-of-type > div")
+		chapterCard = document.querySelector("article:first-of-type > div")
 		stars = chapters[currentChapter].querySelectorAll(
 			"section:first-of-type div"
 		)
@@ -271,9 +275,9 @@ const showChapter = () => {
 		}
 	})
 
-	chapterIntroduction.classList.remove("hidden")
+	chapterCard.classList.remove("hidden")
 
-	const chapterButton = chapterIntroduction.querySelector("button")
+	const chapterButton = chapterCard.querySelector("button")
 	chapterButton.removeEventListener("click", introEvent)
 	chapterButton.addEventListener("click", introEvent)
 
@@ -423,7 +427,7 @@ const startDynamicAnimation = (
 	let totalDuration = animationDuration * iterations
 	element.style.animationDuration = `${animationDuration}ms`
 
-	if (chapterIntroduction.classList.contains("hidden")) {
+	if (chapterCard.classList.contains("hidden")) {
 		const animate = () => {
 			setTimeout(() => {
 				element.classList.add(animationName)
@@ -444,7 +448,7 @@ const startDynamicAnimation = (
 
 		// Start the animation initially
 		animate()
-	} else if (!chapterIntroduction.classList.contains("hidden")) {
+	} else if (!chapterCard.classList.contains("hidden")) {
 		return
 	}
 }
