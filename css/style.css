@@ -227,3 +227,30 @@ ANIMATIONS
 		height: 1em;
 	}
 }
+
+@keyframes shake {
+	0% {
+		transform: translateY(5px);
+	}
+	10% {
+		transform: translateY(0px);
+	}
+	90% {
+		transform: translateY(-10px);
+	}
+	100% {
+		transform: translateY(-15px);
+	}
+}
+
+@keyframes blink {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 0;
+	}
+}
