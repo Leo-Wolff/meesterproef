@@ -378,6 +378,8 @@ const ToReality = () => {
 	footer.classList.add("hidden")
 	fantasyArticle.classList.add("hidden")
 
+	textArea.focus()
+
 	startCountdown()
 }
 
@@ -474,6 +476,50 @@ const startAnimation = () => {
 const stopDynamicAnimation = (element, animationName) => {
 	element.classList.remove(animationName)
 }
+
+const lamp = lives[0].querySelector("img:last-of-type")
+const moon = document.querySelector("article:first-of-type > img:first-of-type")
+
+const loadAnimtion = (
+	element,
+	folderName,
+	fileName,
+	numberCode,
+	currentFrame
+) => {
+	const frameSRC = `animations/${folderName}/${fileName}${currentFrame
+		.toString()
+		.padStart(numberCode, "0")}.png`
+
+	element.src = frameSRC
+}
+
+const playAnimation = (
+	element,
+	folderName,
+	fileName,
+	allFrames,
+	numberAmount
+) => {
+	let currentFrame = 0
+	const numberCode = numberAmount
+	const totalFrames = allFrames
+
+	setInterval(() => {
+		loadAnimtion(element, folderName, fileName, numberCode, currentFrame)
+
+		// Increment the current frame number
+		currentFrame++
+
+		// Stop the animation when all frames are loaded
+		if (currentFrame > totalFrames) {
+			currentFrame = 0
+		}
+	}, 1) // Change the interval (in milliseconds) based on your animation speed
+}
+
+playAnimation(lamp, "lamp", "lamp-glow", 380, 3)
+playAnimation(moon, "moon", "moon-swivel", 599, 3)
 
 // Uncomment to show reality upon load
 // realityArticle.classList.remove("hidden")

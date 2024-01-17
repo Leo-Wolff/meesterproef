@@ -1,4 +1,17 @@
 /* *************
+MOON
+************* */
+
+article:first-of-type > img {
+	position: absolute;
+	top: 2em;
+	right: 2em;
+	transform: rotate(-10deg);
+
+	height: 40vh;
+}
+
+/* *************
 CHAPTER CARD
 ************* */
 

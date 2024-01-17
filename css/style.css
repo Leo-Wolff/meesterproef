@@ -35,6 +35,8 @@ ROOT + FONTS
 	--overlay-black-75: rgba(0, 0, 0, 0.75);
 	--white: #efefef;
 	--gold-light: #e9cc7d;
+	--gold-dark: #cbaa4f;
+	--brown-light: #653c2a;
 	--red: #cb4f4f;
 
 	/* fonts */
@@ -122,7 +124,6 @@ article:first-of-type {
 	height: 100vh;
 
 	background: url("../img/fantasy-bg.jpg");
-	background-size: cover;
 }
 
 article:last-of-type {
