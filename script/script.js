@@ -35,7 +35,7 @@ if (currentLife == 2) {
 
 // VARIABLES
 const countdownTimer = document.querySelector(
-	"article:last-of-type > div > div > p"
+	"article:last-of-type > div > section:first-of-type > div p"
 )
 
 let duration = Math.random() * 10000 + 5000
@@ -480,8 +480,8 @@ const stopDynamicAnimation = (element, animationName) => {
 	console.log(stopAnimation)
 }
 
-// Comment to show reality upon load
+// Uncomment to show reality upon load
 // livesSection.classList.remove("hidden")
-// realityArticle.classList.remove("hidden")
-// footer.classList.add("hidden")
-// fantasyArticle.classList.add("hidden")
+realityArticle.classList.remove("hidden")
+footer.classList.add("hidden")
+fantasyArticle.classList.add("hidden")

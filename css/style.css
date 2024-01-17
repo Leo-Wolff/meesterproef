@@ -35,7 +35,7 @@ ROOT + FONTS
 	--overlay-black-75: rgba(0, 0, 0, 0.75);
 	--white: #efefef;
 	--gold-light: #e9cc7d;
-	--red: red;
+	--red: #cb4f4f;
 
 	/* fonts */
 	--heading-font: "Lobster", Optima, source-sans-pro, sans-serif;

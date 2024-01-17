@@ -1,5 +1,5 @@
 /* *************
-DESK
+DESK - STANDARD
 ************* */
 
 article:last-of-type > div {
@@ -9,8 +9,8 @@ article:last-of-type > div {
 	height: 100vh;
 }
 
-/* Countdown timer */
-article:last-of-type > div > div {
+/* Countdown */
+article:last-of-type > div > section:first-of-type > div {
 	position: relative;
 	top: 2em;
 	left: 2em;
@@ -23,7 +23,7 @@ article:last-of-type > div > div {
 	background-size: contain;
 }
 
-article:last-of-type > div > div p {
+article:last-of-type > div > section:first-of-type > div p {
 	position: relative;
 	top: 2em;
 
@@ -36,13 +36,127 @@ article:last-of-type > div > div p {
 }
 
 /* pen */
-article:last-of-type > div > img:first-of-type {
+article:last-of-type > div > section:first-of-type > img:first-of-type {
 	position: absolute;
 	bottom: 5em;
 	left: calc(50% + 50vw / 2 - 2em);
 	transform: translateX(-50%);
 
 	height: 45vh;
+}
+
+/* lamp */
+article:last-of-type > div > section:first-of-type > img:last-of-type {
+	position: absolute;
+	top: -15vh;
+	right: -10vw;
+	transform: rotate(-5deg);
+
+	height: 75vh;
+
+	z-index: 5;
+}
+
+/* *************
+DESK - LIFE 1
+************* */
+
+article:last-of-type > div > section:nth-of-type(2) > img {
+	position: absolute;
+}
+
+article:last-of-type > div > section:nth-of-type(2) > img:first-of-type {
+	top: 5em;
+	left: calc(2em + 20vw + 1em);
+	transform: rotate(-2deg);
+
+	height: 15vh;
+}
+
+article:last-of-type > div > section:nth-of-type(2) > img:nth-of-type(2) {
+	top: 12.5em;
+	right: calc(25vh - 2.5em);
+	transform: rotate(-150deg);
+
+	height: 25vh;
+}
+
+article:last-of-type > div > section:nth-of-type(2) > img:nth-of-type(3) {
+	top: calc(2em + 50vh + 2em);
+	left: 7.5em;
+	transform: rotate(-5deg);
+
+	height: 12.5vh;
+}
+
+article:last-of-type > div > section:nth-of-type(2) > img:last-of-type {
+	top: 50vh;
+	right: calc(25vh - 10em);
+
+	height: 12.5vh;
+}
+
+/* *************
+DESK - LIFE 2
+************* */
+
+article:last-of-type > div > section:nth-of-type(3) > img {
+	position: absolute;
+}
+
+article:last-of-type > div > section:nth-of-type(3) > img:first-of-type {
+	top: 10em;
+	left: calc(2em + 20vw + 3em);
+	transform: rotate(15deg);
+
+	height: 15vh;
+}
+
+article:last-of-type > div > section:nth-of-type(3) > img:nth-of-type(2) {
+	bottom: -15em;
+	left: -2em;
+	transform: rotate(65deg);
+
+	height: 60vh;
+}
+
+article:last-of-type > div > section:nth-of-type(3) > img:last-of-type {
+	top: 50vh;
+	left: 20vw;
+	transform: rotate(5deg);
+
+	height: 17.5vh;
+}
+
+/* *************
+DESK - LIFE 2
+************* */
+
+article:last-of-type > div > section:last-of-type > img {
+	position: absolute;
+}
+
+article:last-of-type > div > section:last-of-type > img:first-of-type {
+	top: 12em;
+	left: calc(1em + 20vw);
+	transform: rotate(-10deg);
+
+	height: 15vh;
+}
+
+article:last-of-type > div > section:last-of-type > img:nth-of-type(2) {
+	top: calc(50vh + 15em);
+	left: calc(20vw + 5em);
+	transform: rotate(-100deg);
+
+	height: 10vh;
+}
+
+article:last-of-type > div > section:last-of-type > img:last-of-type {
+	bottom: 7.5em;
+	right: 10em;
+
+	height: 20vh;
 }
 
 /* *************
