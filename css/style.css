@@ -204,9 +204,31 @@ main > section:first-of-type img {
 	height: 3em;
 }
 
+/* Game over arm */
+article:last-of-type > img:last-of-type {
+	position: absolute;
+	bottom: -75vh;
+	transform: translateX(-25vw);
+
+	height: 175vh;
+
+	z-index: 20;
+
+	/* animation: swipe-arm 1s ease-in infinite; */
+}
+
 /* *************
 ANIMATIONS
 ************* */
+@keyframes swipe-arm {
+	0% {
+		transform: translateX(-25vw);
+	}
+	100% {
+		transform: translateX(100vw);
+	}
+}
+
 @keyframes selected {
 	0% {
 		transform-origin: center;

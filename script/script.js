@@ -522,6 +522,6 @@ playAnimation(lamp, "lamp", "lamp-glow", 380, 3)
 playAnimation(moon, "moon", "moon-swivel", 599, 3)
 
 // Uncomment to show reality upon load
-// realityArticle.classList.remove("hidden")
-// footer.classList.add("hidden")
-// fantasyArticle.classList.add("hidden")
+realityArticle.classList.remove("hidden")
+footer.classList.add("hidden")
+fantasyArticle.classList.add("hidden")
