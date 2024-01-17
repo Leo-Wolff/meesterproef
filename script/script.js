@@ -9,9 +9,8 @@ import realityData from "./reality-data.js"
 // /////////////
 
 // VARIABLES
-const livesSection = document.querySelector("main > section:first-of-type")
-const lives = livesSection.querySelectorAll("img")
-let currentLife = 0
+const lives = document.querySelectorAll("article:last-of-type > div > section")
+let currentLife = 1
 
 const checkLives = () => {
 	// Make sure that when the page loads the user doesn't instantly lose a life
@@ -19,14 +18,16 @@ const checkLives = () => {
 	}
 	// If the user does not complete the level by typing all the text, they lose a life
 	else if (textArea.value.length != taskText.length) {
-		lives[currentLife].src = "img/life-lost.svg"
+		lives[currentLife].classList.remove("hidden")
 
 		currentLife++
 	}
-}
 
-if (currentLife == 2) {
-	alert("Ahhhhhh! Stress")
+	if (currentLife == 5) {
+		alert("Ahhhhhh! Stress")
+	}
+
+	console.log("currentLife", currentLife)
 }
 
 // /////////////
@@ -54,10 +55,9 @@ const startCountdown = () => {
 		countdownDuration--
 
 		if (countdownDuration <= 0) {
-			setTimeout(() => {
-				clearInterval(countdownInterval)
-				toFantasy() // When the countdown reaches zero, transition to the fantasy
-			}, 1000)
+			clearInterval(countdownInterval)
+
+			toFantasy() // When the countdown reaches zero, transition to the fantasy
 		}
 
 		updateCountdownTimer()
@@ -98,7 +98,7 @@ const typeText = (event) => {
 			!realityArticle.classList.contains("hidden")
 		) {
 			console.log("Task complete")
-			toFantasy()
+			countdownDuration = 0
 		} else {
 			// Prevent other keys from triggering default behavior
 			event.preventDefault()
@@ -260,8 +260,6 @@ const nextChapter = () => {
 		})
 
 		pageNavigation()
-
-		console.log(currentChapter)
 	}
 }
 
@@ -376,7 +374,6 @@ const ToReality = () => {
 
 	startAnimation()
 
-	livesSection.classList.remove("hidden")
 	realityArticle.classList.remove("hidden")
 	footer.classList.add("hidden")
 	fantasyArticle.classList.add("hidden")
@@ -389,14 +386,13 @@ footer.addEventListener("click", () => {
 })
 
 const toFantasy = () => {
-	checkLives()
-
 	console.log("To Fantasy")
+
+	checkLives()
 
 	stopRealityAnimation = true
 	resetCountdown()
 
-	livesSection.classList.add("hidden")
 	realityArticle.classList.add("hidden")
 	fantasyArticle.classList.remove("hidden")
 
@@ -477,11 +473,9 @@ const startAnimation = () => {
 
 const stopDynamicAnimation = (element, animationName) => {
 	element.classList.remove(animationName)
-	console.log(stopAnimation)
 }
 
 // Uncomment to show reality upon load
-// livesSection.classList.remove("hidden")
-realityArticle.classList.remove("hidden")
-footer.classList.add("hidden")
-fantasyArticle.classList.add("hidden")
+// realityArticle.classList.remove("hidden")
+// footer.classList.add("hidden")
+// fantasyArticle.classList.add("hidden")
