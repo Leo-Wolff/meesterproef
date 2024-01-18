@@ -123,7 +123,7 @@ LAY-OUT
 article:first-of-type {
 	height: 100vh;
 
-	background: url("../img/fantasy-bg.jpg");
+	background: url("../animations/fantasy-bg/sky-animated0000.png");
 }
 
 article:last-of-type {
@@ -214,12 +214,26 @@ article:last-of-type > img:last-of-type {
 
 	z-index: 20;
 
-	/* animation: swipe-arm 1s ease-in infinite; */
+	animation: swipe-arm 0.75s ease-in forwards;
+}
+
+article:last-of-type > section.lost,
+article:last-of-type > div.lost {
+	animation: swipe-article 0.75s ease-in forwards;
 }
 
 /* *************
 ANIMATIONS
 ************* */
+@keyframes swipe-article {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(110vw);
+	}
+}
+
 @keyframes swipe-arm {
 	0% {
 		transform: translateX(-25vw);

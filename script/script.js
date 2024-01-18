@@ -10,7 +10,7 @@ import realityData from "./reality-data.js"
 
 // VARIABLES
 const lives = document.querySelectorAll("article:last-of-type > div > section")
-let currentLife = 1
+let currentLife = 3
 
 const checkLives = () => {
 	// Make sure that when the page loads the user doesn't instantly lose a life
@@ -24,7 +24,18 @@ const checkLives = () => {
 	}
 
 	if (currentLife == 5) {
-		alert("Ahhhhhh! Stress")
+		setTimeout(() => {
+			// arm
+			document
+				.querySelector("article:last-of-type > img:last-of-type")
+				.classList.remove("hidden")
+
+			// clutter
+			document.querySelector("article:last-of-type > div").classList.add("lost")
+
+			// task
+			tasks[currentTask].classList.add("lost")
+		}, 1000)
 	}
 
 	console.log("currentLife", currentLife)
@@ -54,10 +65,32 @@ const startCountdown = () => {
 	const countdownInterval = setInterval(() => {
 		countdownDuration--
 
-		if (countdownDuration <= 0) {
+		if (countdownDuration <= 0 && currentLife != 4) {
+			clearInterval(countdownInterval)
+
+			console.log("not 4")
+
+			toFantasy() // When the countdown reaches zero, transition to the fantasy
+		} else if (
+			countdownDuration <= 0 &&
+			currentLife == 4 &&
+			textArea.value.length == taskText.length
+		) {
+			console.log("life still there")
 			clearInterval(countdownInterval)
 
 			toFantasy() // When the countdown reaches zero, transition to the fantasy
+		} else if (
+			countdownDuration <= 0 &&
+			currentLife == 4 &&
+			textArea.value.length != taskText.length
+		) {
+			console.log("game lost")
+			stopRealityAnimation = true
+
+			checkLives()
+
+			clearInterval(countdownInterval)
 		}
 
 		updateCountdownTimer()
@@ -480,7 +513,7 @@ const stopDynamicAnimation = (element, animationName) => {
 const lamp = lives[0].querySelector("img:last-of-type")
 const moon = document.querySelector("article:first-of-type > img:first-of-type")
 
-const loadAnimtion = (
+const loadAnimation = (
 	element,
 	folderName,
 	fileName,
@@ -494,6 +527,24 @@ const loadAnimtion = (
 	element.src = frameSRC
 }
 
+const loadBackgroundAnimation = (
+	element,
+	folderName,
+	fileName,
+	numberCode,
+	currentFrame
+) => {
+	const backgroundSRC = `url(animations/${folderName}/${fileName}${currentFrame
+		.toString()
+		.padStart(numberCode, "0")}.png)`
+
+	element.style.backgroundImage = backgroundSRC
+}
+
+// style="
+// 					background-image: url(animations/fantasy-bg/sky-animated0000.png);
+// 				"
+
 const playAnimation = (
 	element,
 	folderName,
@@ -506,7 +557,37 @@ const playAnimation = (
 	const totalFrames = allFrames
 
 	setInterval(() => {
-		loadAnimtion(element, folderName, fileName, numberCode, currentFrame)
+		loadAnimation(element, folderName, fileName, numberCode, currentFrame)
+
+		// Increment the current frame number
+		currentFrame++
+
+		// Stop the animation when all frames are loaded
+		if (currentFrame > totalFrames) {
+			currentFrame = 0
+		}
+	}, 1) // Change the interval (in milliseconds) based on your animation speed
+}
+
+const playBackgroundAnimation = (
+	element,
+	folderName,
+	fileName,
+	allFrames,
+	numberAmount
+) => {
+	let currentFrame = 0
+	const numberCode = numberAmount
+	const totalFrames = allFrames
+
+	setInterval(() => {
+		loadBackgroundAnimation(
+			element,
+			folderName,
+			fileName,
+			numberCode,
+			currentFrame
+		)
 
 		// Increment the current frame number
 		currentFrame++
@@ -520,8 +601,9 @@ const playAnimation = (
 
 playAnimation(lamp, "lamp", "lamp-glow", 380, 3)
 playAnimation(moon, "moon", "moon-swivel", 599, 3)
+// playBackgroundAnimation(fantasyArticle, "fantasy-bg", "sky-animated", 1199, 4)
 
 // Uncomment to show reality upon load
-realityArticle.classList.remove("hidden")
-footer.classList.add("hidden")
-fantasyArticle.classList.add("hidden")
+// realityArticle.classList.remove("hidden")
+// footer.classList.add("hidden")
+// fantasyArticle.classList.add("hidden")

@@ -131,14 +131,14 @@ article:last-of-type > div > section:nth-of-type(3) > img:last-of-type {
 }
 
 /* *************
-DESK - LIFE 2
+DESK - LIFE 3
 ************* */
 
-article:last-of-type > div > section:last-of-type > img {
+article:last-of-type > div > section:nth-of-type(4) > img {
 	position: absolute;
 }
 
-article:last-of-type > div > section:last-of-type > img:first-of-type {
+article:last-of-type > div > section:nth-of-type(4) > img:first-of-type {
 	top: 12em;
 	left: calc(1em + 20vw);
 	transform: rotate(-10deg);
@@ -146,7 +146,7 @@ article:last-of-type > div > section:last-of-type > img:first-of-type {
 	height: 15vh;
 }
 
-article:last-of-type > div > section:last-of-type > img:nth-of-type(2) {
+article:last-of-type > div > section:nth-of-type(4) > img:nth-of-type(2) {
 	top: calc(50vh + 15em);
 	left: calc(20vw + 5em);
 	transform: rotate(-100deg);
@@ -154,7 +154,7 @@ article:last-of-type > div > section:last-of-type > img:nth-of-type(2) {
 	height: 10vh;
 }
 
-article:last-of-type > div > section:last-of-type > img:last-of-type {
+article:last-of-type > div > section:nth-of-type(4) > img:last-of-type {
 	bottom: 7.5em;
 	right: 10em;
 
