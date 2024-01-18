@@ -216,6 +216,8 @@ let chapterBook = chapters[currentChapter].querySelector("section:last-of-type")
 let pages = chapterBook.querySelectorAll("img:not(section > button > img)")
 let navButtons = chapterBook.querySelectorAll("button")
 
+const fantasyBG = new Audio("audio/fantasy-bg.mp3")
+
 const updateIntro = () => {
 	chapterCard.querySelector(
 		"p:first-of-type"
@@ -239,7 +241,18 @@ const introEvent = () => {
 		setTimeout(navToReality, duration)
 
 		fantasyTimer = true
+
+		// background music
+		fantasyBG.volume = 0.1
+		fantasyBG.loop = true
+
+		fantasyBG.play()
 	}
+
+	const chapterStarted = new Audio("audio/star-selected.mp3")
+	chapterStarted.volume = 0.75
+
+	chapterStarted.play()
 }
 
 // /////////////
@@ -247,6 +260,11 @@ const introEvent = () => {
 // /////////////
 
 const starSelect = (event) => {
+	const audioSelected = new Audio("audio/star-selected.mp3")
+	audioSelected.volume = 0.5
+
+	audioSelected.play()
+
 	// Add the "active" class to the clicked star
 	event.target.classList.add("active")
 
@@ -385,6 +403,10 @@ pageNavigation()
 let fantasyArticle = document.querySelector("article:first-of-type")
 let realityArticle = document.querySelector("article:last-of-type")
 
+const realityBG = new Audio("audio/reality-bg.mp3")
+realityBG.loop = true
+realityBG.volume = 0.1
+
 const navToReality = () => {
 	resetTask()
 
@@ -414,6 +436,11 @@ const ToReality = () => {
 	textArea.focus()
 
 	startCountdown()
+
+	realityBG.currentTime
+	realityBG.play()
+
+	fantasyBG.pause()
 }
 
 footer.addEventListener("click", () => {
@@ -434,7 +461,16 @@ const toFantasy = () => {
 	duration = Math.random() * 10000 + 10000
 	console.log("Chapter timer:", duration)
 	setTimeout(navToReality, duration)
+
+	fantasyBG.currentTime
+	fantasyBG.play()
+
+	realityBG.pause()
 }
+
+// const findAudioPosition = () => {
+
+// }
 
 // /////////////
 // ANIMATIONS
