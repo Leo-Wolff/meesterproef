@@ -10,9 +10,8 @@ import realityData from "./reality-data.js"
 
 // VARIABLES
 const lives = document.querySelectorAll("article:last-of-type > div > section")
-let currentLife = 4
-
-console.log(lives[4])
+const lostAudio = new Audio("audio/game-over.mp3")
+let currentLife = 1
 
 const checkLives = () => {
 	// Make sure that when the page loads the user doesn't instantly lose a life
@@ -40,17 +39,15 @@ const checkLives = () => {
 					section.classList.add("lost")
 				}
 			})
-			// document
-			// 	.querySelector("article:last-of-type > div > section")
-			// 	.classList.add("lost")
-			// lives[4].classList.remove("lost")
 
 			// task
 			tasks[currentTask].classList.add("lost")
+
+			lostAudio.play()
 		}, 1000)
 	}
 
-	console.log("currentLife", currentLife)
+	console.log("Current life:", currentLife)
 }
 
 // /////////////
@@ -84,15 +81,12 @@ const startCountdown = () => {
 		if (countdownDuration <= 0 && currentLife != 4) {
 			clearInterval(countdownInterval)
 
-			console.log("not 4")
-
 			toFantasy() // When the countdown reaches zero, transition to the fantasy
 		} else if (
 			countdownDuration <= 0 &&
 			currentLife == 4 &&
 			textArea.value.length == taskText.length
 		) {
-			console.log("life still there")
 			clearInterval(countdownInterval)
 
 			toFantasy() // When the countdown reaches zero, transition to the fantasy
@@ -101,7 +95,7 @@ const startCountdown = () => {
 			currentLife == 4 &&
 			textArea.value.length != taskText.length
 		) {
-			console.log("game lost")
+			console.log("Game over")
 			stopRealityAnimation = true
 
 			checkLives()
@@ -222,7 +216,7 @@ window.addEventListener("load", () => {
 
 // VARIABLES
 let fantasyTimer = false
-let currentChapter = 0
+let currentChapter = 4
 let pagesIndex = 0
 
 const chapters = document.querySelectorAll("article:first-of-type > section")
@@ -304,7 +298,9 @@ const nextChapter = () => {
 			.querySelector("section:last-of-type")
 			.classList.contains("hidden")
 	) {
-		alert("ya did it!")
+		window.location.href = "vision.html"
+		console.log(navButtons[2])
+		navButtons[2].innerHTML = "The End"
 	} else {
 		currentChapter++
 
@@ -383,6 +379,15 @@ const pageNavigation = () => {
 	} else {
 		navButtons[1].classList.add("hidden")
 		navButtons[2].classList.remove("hidden")
+	}
+
+	if (
+		!chapters[4]
+			.querySelector("section:last-of-type")
+			.classList.contains("hidden")
+	) {
+		console.log(navButtons[2])
+		navButtons[2].innerHTML = "The End"
 	}
 }
 
