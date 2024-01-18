@@ -214,9 +214,11 @@ article:last-of-type > section > form textarea {
 }
 
 article:last-of-type > section > form textarea:focus {
-	border: var(--gold-light) 2px solid;
+	border: none;
+	box-shadow: 10px 10px 10px var(--gold-dark), -10px -10px 10px var(--gold-dark),
+		-10px 10px 10px var(--gold-dark), 10px -10px 10px var(--gold-dark);
 
-	outline: 5px solid var(--brown-light);
+	outline: 5px solid var(--red);
 }
 
 article:last-of-type > section > form label > img {

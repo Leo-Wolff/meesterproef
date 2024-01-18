@@ -10,7 +10,7 @@ import realityData from "./reality-data.js"
 
 // VARIABLES
 const lives = document.querySelectorAll("article:last-of-type > div > section")
-let currentLife = 3
+let currentLife = 1
 
 const checkLives = () => {
 	// Make sure that when the page loads the user doesn't instantly lose a life
@@ -52,7 +52,7 @@ const countdownTimer = document.querySelector(
 const countdownAudio = new Audio("audio/timer.mp3")
 countdownAudio.volume = 0.75
 
-let duration = Math.random() * 10000 + 5000
+let duration = Math.random() * 10000 + 20000
 let countdownDuration = 30
 
 // Function to update the countdown timer
@@ -121,21 +121,6 @@ let textArea = tasks[currentTask].querySelector("textarea")
 let taskText = realityData[currentTask].taskText
 
 const writeAudio = new Audio("audio/write.mp3")
-let audioRepeat = []
-
-// TASK BEHAVIOUR
-const writeSoundEffect = () => {
-	writeAudio.play()
-	audioRepeat.push(writeAudio)
-
-	writeAudio.addEventListener("ended", () => {
-		const audioIndex = audioRepeat.indexOf(writeAudio)
-
-		if (audioIndex !== 1) {
-			audioRepeat.splice(index, 1)
-		}
-	})
-}
 
 const typeText = (event) => {
 	if (/^[a-zA-Z]$/.test(event.key)) {
@@ -147,7 +132,7 @@ const typeText = (event) => {
 			// Increase currentCharacter so that the next iteration of the function can type the next character
 			currentCharacter++
 
-			writeSoundEffect()
+			writeAudio.play()
 		} else if (
 			currentCharacter == taskText.length &&
 			!realityArticle.classList.contains("hidden")
@@ -480,7 +465,7 @@ const toFantasy = () => {
 	realityArticle.classList.add("hidden")
 	fantasyArticle.classList.remove("hidden")
 
-	duration = Math.random() * 10000 + 10000
+	duration = Math.random() * 10000 + 30000
 	console.log("Chapter timer:", duration)
 	setTimeout(navToReality, duration)
 
