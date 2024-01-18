@@ -10,7 +10,9 @@ import realityData from "./reality-data.js"
 
 // VARIABLES
 const lives = document.querySelectorAll("article:last-of-type > div > section")
-let currentLife = 1
+let currentLife = 4
+
+console.log(lives[4])
 
 const checkLives = () => {
 	// Make sure that when the page loads the user doesn't instantly lose a life
@@ -31,7 +33,17 @@ const checkLives = () => {
 				.classList.remove("hidden")
 
 			// clutter
-			document.querySelector("article:last-of-type > div").classList.add("lost")
+			lives.forEach((section, index) => {
+				if (index == 4) {
+					section.classList.remove("hidden")
+				} else {
+					section.classList.add("lost")
+				}
+			})
+			// document
+			// 	.querySelector("article:last-of-type > div > section")
+			// 	.classList.add("lost")
+			// lives[4].classList.remove("lost")
 
 			// task
 			tasks[currentTask].classList.add("lost")

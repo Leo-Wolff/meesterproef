@@ -45,10 +45,6 @@ article:first-of-type > div {
 	animation: fade-in 2s ease-in-out forwards;
 }
 
-article:first-of-type div:hover {
-	cursor: pointer;
-}
-
 article:first-of-type > div > section {
 	position: relative;
 	top: calc(50% - 75vh / 2);
@@ -116,7 +112,11 @@ article:first-of-type > div button {
 }
 
 article:first-of-type > div button:hover {
+	transform: translate(-50%) scale(1.05);
+
 	border: 2px solid var(--white);
+
+	animation: none;
 }
 
 /* *************
@@ -150,6 +150,10 @@ article:first-of-type > section div {
 
 	background-color: var(--white);
 	animation: glow 2.5s alternate ease-in-out infinite;
+}
+
+article:first-of-type > section div:hover {
+	cursor: pointer;
 }
 
 article:first-of-type > section:first-of-type div {

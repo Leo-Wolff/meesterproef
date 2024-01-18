@@ -170,6 +170,101 @@ article:last-of-type > div > section:nth-of-type(4) > img:last-of-type {
 }
 
 /* *************
+GAME OVER
+************* */
+
+article:last-of-type > div > section:last-of-type {
+	position: absolute;
+	top: calc(50% - 75vh / 2);
+
+	width: 100vw;
+	height: 75vh;
+
+	animation: fade-in 3s 2s forwards;
+	z-index: 10;
+	opacity: 0;
+}
+
+article:last-of-type > div > section:last-of-type.lost {
+	animation: none;
+}
+
+h3 {
+	font-family: var(--countdown-font);
+	font-weight: 900;
+	font-size: calc(2em + 0.5vw);
+	text-align: center;
+	text-transform: uppercase;
+	color: var(--white);
+}
+
+article:last-of-type > div > section:last-of-type p {
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+
+	width: 40em;
+
+	text-align: center;
+}
+
+article:last-of-type > div > section:last-of-type section {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+
+	margin-top: 4em;
+
+	width: 40em;
+}
+
+article:last-of-type > div > section:last-of-type section a {
+	border-radius: 10px;
+	padding: 1em 0;
+
+	width: 17.5em;
+
+	font-family: var(--text-font);
+	text-align: center;
+	text-decoration: none;
+	color: var(--white);
+}
+
+article:last-of-type > div > section:last-of-type section a:hover {
+	transform: scale(1.05);
+
+	cursor: pointer;
+
+	background-color: var(--black);
+	transition: 0.5s ease-in;
+}
+
+article:last-of-type > div > section:last-of-type section a:first-of-type {
+	border: 4px solid var(--black);
+
+	text-transform: uppercase;
+	background-color: var(--black);
+}
+
+article:last-of-type > div > section:last-of-type section a:last-of-type {
+	border: 4px solid var(--black);
+
+	text-transform: lowercase;
+}
+
+article:last-of-type
+	> div
+	> section:last-of-type
+	section
+	a:first-of-type:hover {
+	border: 4px solid var(--white);
+}
+
+/* *************
 TASKS
 ************* */
 

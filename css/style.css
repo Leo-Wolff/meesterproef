@@ -243,7 +243,7 @@ article:last-of-type > img:last-of-type {
 }
 
 article:last-of-type > section.lost,
-article:last-of-type > div.lost {
+article:last-of-type > div > section.lost {
 	animation: swipe-article 0.75s ease-in forwards;
 }
 
