@@ -1,0 +1,70 @@
+body {
+	background-image: url("../animations/fantasy-bg/sky-animated0000.png");
+}
+
+article {
+	position: absolute;
+	top: calc(50% - 75vh / 2);
+	left: 50%;
+	transform: translateX(-50%);
+
+	border-radius: 2em;
+
+	width: 75vw;
+	height: 75vh;
+
+	background-color: var(--paper);
+}
+
+article > p {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+
+	margin-bottom: 1em;
+
+	width: 50vw;
+
+	font-size: 1em;
+	text-indent: 0;
+	color: var(--black);
+}
+
+article > ul {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+
+	width: 50vw;
+}
+
+article > a {
+	display: block;
+
+	position: absolute;
+	left: calc(50% - (17.5em + 10em) / 2);
+	bottom: 2em;
+
+	border-radius: 20px;
+	padding: 1.5em 5em;
+
+	width: 17.5em;
+
+	font-family: var(--text-font);
+	font-size: 0.75em;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: var(--white);
+	background-color: var(--black);
+}
+
+article > a:hover {
+	border: 2px solid var(--white);
+	box-shadow: 10px 10px 7.5px var(--gold-light),
+		-10px -10px 7.5px var(--gold-light), 10px -10px 7.5px var(--gold-light),
+		-10px 10px 7.5px var(--gold-light);
+
+	transition: 0.2s ease-in-out;
+}

@@ -34,6 +34,7 @@ ROOT + FONTS
 	--black: #130d17;
 	--overlay-black-75: rgba(0, 0, 0, 0.75);
 	--white: #efefef;
+	--paper: #ffe1bf;
 	--gold-light: #e9cc7d;
 	--gold-dark: #cbaa4f;
 	--brown-light: #653c2a;
@@ -61,6 +62,15 @@ body {
 	background-color: var(--black);
 }
 
+h1 {
+	margin: 0.25em 0 0.5em 0;
+
+	font-family: var(--heading-font);
+	font-size: calc(2em + 0.5vw);
+	text-align: center;
+	color: var(--black);
+}
+
 h2 {
 	margin: 0;
 
@@ -77,6 +87,12 @@ p {
 	font-size: calc(1em + 0.5vw);
 	text-indent: 1em;
 	color: var(--white);
+}
+
+li {
+	font-family: var(--text-font);
+	font-size: 1em;
+	color: var(--black);
 }
 
 label,
@@ -117,24 +133,48 @@ article:first-of-type > section div.active {
 }
 
 /* *************
-LAY-OUT
+VISION LINK
 ************* */
-/* Fantasy and reality */
-article:first-of-type {
-	height: 100vh;
 
-	background: url("../animations/fantasy-bg/sky-animated0000.png");
+main > section:first-of-type {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	border-radius: 0 0 100% 0;
+
+	width: 7.5em;
+	height: 7.5em;
+
+	background-color: var(--gold-light);
+
+	opacity: 0;
 }
 
-article:last-of-type {
+main > section:first-of-type:hover {
+	width: 9em;
+	height: 9em;
+
+	transition: 0.5s ease-in-out;
+	opacity: 1;
+}
+
+main > section:first-of-type > a {
 	position: relative;
+	top: 1.5em;
+	left: 1em;
 
-	height: 100vh;
-
-	background: url("../img/reality-bg.jpg");
+	font-size: 1.25em;
+	font-family: var(--text-font);
+	font-weight: bold;
+	text-decoration: none;
+	color: var(--black);
 }
 
-/* Navigation to reality */
+/* *************
+NAVIGATION TO REALITY
+************* */
+
 footer {
 	position: absolute;
 	bottom: 0;
@@ -188,21 +228,6 @@ footer.blink:hover {
 /* *************
 LIVES
 ************* */
-main > section:first-of-type {
-	display: flex;
-	gap: 1em;
-
-	position: fixed;
-	top: 3vh;
-	right: 3vw;
-
-	z-index: 5;
-}
-
-main > section:first-of-type img {
-	width: 3em;
-	height: 3em;
-}
 
 /* Game over arm */
 article:last-of-type > img:last-of-type {
