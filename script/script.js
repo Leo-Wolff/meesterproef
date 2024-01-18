@@ -216,7 +216,7 @@ window.addEventListener("load", () => {
 
 // VARIABLES
 let fantasyTimer = false
-let currentChapter = 4
+let currentChapter = 0
 let pagesIndex = 0
 
 const chapters = document.querySelectorAll("article:first-of-type > section")
