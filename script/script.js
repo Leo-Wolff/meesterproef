@@ -49,6 +49,8 @@ const checkLives = () => {
 const countdownTimer = document.querySelector(
 	"article:last-of-type > div > section:first-of-type > div p"
 )
+const countdownAudio = new Audio("audio/timer.mp3")
+countdownAudio.volume = 0.75
 
 let duration = Math.random() * 10000 + 5000
 let countdownDuration = 30
@@ -58,6 +60,8 @@ const updateCountdownTimer = () => {
 	const seconds = countdownDuration % 60
 	const formattedTime = `00:${seconds.toString().padStart(2, "0")}`
 	countdownTimer.textContent = formattedTime
+
+	countdownAudio.play()
 }
 
 // Function to start the countdown
@@ -116,7 +120,23 @@ let footerText = footer.querySelector("p")
 let textArea = tasks[currentTask].querySelector("textarea")
 let taskText = realityData[currentTask].taskText
 
+const writeAudio = new Audio("audio/write.mp3")
+let audioRepeat = []
+
 // TASK BEHAVIOUR
+const writeSoundEffect = () => {
+	writeAudio.play()
+	audioRepeat.push(writeAudio)
+
+	writeAudio.addEventListener("ended", () => {
+		const audioIndex = audioRepeat.indexOf(writeAudio)
+
+		if (audioIndex !== 1) {
+			audioRepeat.splice(index, 1)
+		}
+	})
+}
+
 const typeText = (event) => {
 	if (/^[a-zA-Z]$/.test(event.key)) {
 		// If currentCharacter is smaller than taskText.length than there will be more text to type
@@ -126,6 +146,8 @@ const typeText = (event) => {
 
 			// Increase currentCharacter so that the next iteration of the function can type the next character
 			currentCharacter++
+
+			writeSoundEffect()
 		} else if (
 			currentCharacter == taskText.length &&
 			!realityArticle.classList.contains("hidden")
@@ -216,7 +238,7 @@ let chapterBook = chapters[currentChapter].querySelector("section:last-of-type")
 let pages = chapterBook.querySelectorAll("img:not(section > button > img)")
 let navButtons = chapterBook.querySelectorAll("button")
 
-const fantasyBG = new Audio("audio/fantasy-bg.mp3")
+const fantasyAudioBG = new Audio("audio/fantasy-bg.mp3")
 
 const updateIntro = () => {
 	chapterCard.querySelector(
@@ -243,10 +265,10 @@ const introEvent = () => {
 		fantasyTimer = true
 
 		// background music
-		fantasyBG.volume = 0.1
-		fantasyBG.loop = true
+		fantasyAudioBG.volume = 0.1
+		fantasyAudioBG.loop = true
 
-		fantasyBG.play()
+		fantasyAudioBG.play()
 	}
 
 	const chapterStarted = new Audio("audio/star-selected.mp3")
@@ -440,7 +462,7 @@ const ToReality = () => {
 	realityBG.currentTime
 	realityBG.play()
 
-	fantasyBG.pause()
+	fantasyAudioBG.pause()
 }
 
 footer.addEventListener("click", () => {
@@ -462,15 +484,11 @@ const toFantasy = () => {
 	console.log("Chapter timer:", duration)
 	setTimeout(navToReality, duration)
 
-	fantasyBG.currentTime
-	fantasyBG.play()
+	fantasyAudioBG.currentTime
+	fantasyAudioBG.play()
 
 	realityBG.pause()
 }
-
-// const findAudioPosition = () => {
-
-// }
 
 // /////////////
 // ANIMATIONS
@@ -548,6 +566,9 @@ const stopDynamicAnimation = (element, animationName) => {
 
 const lamp = lives[0].querySelector("img:last-of-type")
 const moon = document.querySelector("article:first-of-type > img:first-of-type")
+const fantasyBG = document.querySelector(
+	"article:first-of-type > img:last-of-type"
+)
 
 const loadAnimation = (
 	element,
@@ -562,24 +583,6 @@ const loadAnimation = (
 
 	element.src = frameSRC
 }
-
-const loadBackgroundAnimation = (
-	element,
-	folderName,
-	fileName,
-	numberCode,
-	currentFrame
-) => {
-	const backgroundSRC = `url(animations/${folderName}/${fileName}${currentFrame
-		.toString()
-		.padStart(numberCode, "0")}.png)`
-
-	element.style.backgroundImage = backgroundSRC
-}
-
-// style="
-// 					background-image: url(animations/fantasy-bg/sky-animated0000.png);
-// 				"
 
 const playAnimation = (
 	element,
@@ -605,39 +608,9 @@ const playAnimation = (
 	}, 1) // Change the interval (in milliseconds) based on your animation speed
 }
 
-const playBackgroundAnimation = (
-	element,
-	folderName,
-	fileName,
-	allFrames,
-	numberAmount
-) => {
-	let currentFrame = 0
-	const numberCode = numberAmount
-	const totalFrames = allFrames
-
-	setInterval(() => {
-		loadBackgroundAnimation(
-			element,
-			folderName,
-			fileName,
-			numberCode,
-			currentFrame
-		)
-
-		// Increment the current frame number
-		currentFrame++
-
-		// Stop the animation when all frames are loaded
-		if (currentFrame > totalFrames) {
-			currentFrame = 0
-		}
-	}, 1) // Change the interval (in milliseconds) based on your animation speed
-}
-
 playAnimation(lamp, "lamp", "lamp-glow", 380, 3)
 playAnimation(moon, "moon", "moon-swivel", 599, 3)
-// playBackgroundAnimation(fantasyArticle, "fantasy-bg", "sky-animated", 1199, 4)
+playAnimation(fantasyBG, "fantasy-bg", "sky-animated", 1199, 4)
 
 // Uncomment to show reality upon load
 // realityArticle.classList.remove("hidden")

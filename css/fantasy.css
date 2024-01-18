@@ -1,20 +1,32 @@
 article:first-of-type {
+	width: 100vw;
 	height: 100vh;
 
-	background: url("../animations/fantasy-bg/sky-animated0000.png");
+	/* background: url("../animations/fantasy-bg/sky-animated0000.png"); */
 }
 
 /* *************
-MOON
+ANIMATIONS
 ************* */
 
-article:first-of-type > img {
+article:first-of-type > img:first-of-type {
 	position: absolute;
 	top: 2em;
 	right: 2em;
 	transform: rotate(-10deg);
 
 	height: 40vh;
+}
+
+article:first-of-type > img:last-of-type {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 110vw;
+	height: 110vh;
+
+	z-index: -1;
 }
 
 /* *************
